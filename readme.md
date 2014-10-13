@@ -41,6 +41,9 @@ UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに�
 
 利用例は、`/examples/ATTiny45_Sounder3/ATTiny45_Sounder3.ino` を見てください。
 
+これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
+オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。
+
 ## 配線
 
 ![schematic](schema.png)
