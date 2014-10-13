@@ -6,14 +6,14 @@ Simple Arduino V-USB MIDI Library for ATTiny45.
 
 ### 準備
 
-[kosakalabさんのhardware.zip](http://make.kosakalab.com/arduino/use/source/hardware.zip)を使います。
-あと、ATTiny45あるいは85をArduino ISPで焼き込む環境が必要です。
-詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照してください。
+ArduinoでATTiny45/85を開発するために、[kosakalabさんのhardware.zip](http://make.kosakalab.com/arduino/use/source/hardware.zip)を使わせていただいてます。
+あわせて、ATTiny45/85をArduino ISPで焼き込む環境が必要です。
+詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照して、ATTiny45/85にファームウェアを書き込み環境を準備してください。
 
 ### boards.txtへの追加
 
-ATTiny45/85を16.5Mhzで使います。
-例えば、ATTiny45の場合、boards.txtに下記のように定義を追加してください。
+ATTiny45/85は16.5Mhzで使います。
+このため、例えば、ATTiny45の場合、boards.txtに下記のように定義を追加してください。
 
 ```boards.txt
 attiny45-16.name=ATtiny45 (internal 16.5 MHz clock)
@@ -59,6 +59,7 @@ V-USBをはじめ、下記ソースをベースにしています。
 
 - Atmel Attiny45 / Attiny85 based USB MIDI controller by Thorsten
   http://electronicsodyssey.blogspot.jp/2011/10/atmel-attiny45-attiny85-based-usb-midi.html
+
 
 
 
