@@ -1,6 +1,10 @@
 # UsbMidiAttiny45in3
 
-Simple Arduino V-USB MIDI Library for ATTiny45.
+This is a simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATTiny45/85.
+
+Arduino環境から、ATTiny45/85を使ったUSB-MIDIデバイスを作るためのシンプルなライブラリです。
+[V-USB](http://www.obdev.at/products/vusb/index.html)をベースにしています。
+
 
 ## 使い方
 
