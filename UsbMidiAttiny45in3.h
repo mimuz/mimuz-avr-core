@@ -363,6 +363,22 @@ public:
 		sendMidiMessage(buffer,4);
 	}
 
+	void sendNoteOff(byte ch, byte note){
+		buffer[0] = 0x08;
+		buffer[1] = 0x80 | ch;
+		buffer[2] = 0x7f & note;
+		buffer[3] = 0;
+		sendMidiMessage(buffer,4);
+	}
+
+	void sendCtlChange(byte ch, byte num, byte value){
+		buffer[0] = 0x0b;
+		buffer[1] = 0xb0 | ch;
+		buffer[2] = 0x7f & num;
+		buffer[3] = 0x7f & value;
+		sendMidiMessage(buffer,4);
+	}
+
  	void setHdlNoteOff(void (*fptr)(byte ch, byte note, byte vel)){
  		cbNoteOff = fptr;
  	}
