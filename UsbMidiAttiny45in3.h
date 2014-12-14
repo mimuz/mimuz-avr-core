@@ -396,7 +396,7 @@ private:
 
 	void sendMidiMessage(byte *data, byte size) {
 		while (!usbInterruptIsReady()) {
-			wdt_reset();
+//			wdt_reset();
 			usbPoll();
 		}
    	usbSetInterrupt(data, size);

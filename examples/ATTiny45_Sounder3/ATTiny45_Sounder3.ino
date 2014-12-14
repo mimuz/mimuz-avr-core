@@ -58,11 +58,12 @@ volatile int volume = 0;
 volatile byte shiftvalue = SHIFT_BASE;
 volatile byte level = 1;
 
+volatile int levVol;
+
 #define FADE_MAX 256
 unsigned int fade_time = 1;
 byte lastnote = 0;
 unsigned int fadecnt = 0;
-unsigned int startcnt = 0;
 
 void fadeout(void){
  if(fadecnt != 0){
@@ -126,11 +127,14 @@ void lfo(){
 }
 
 void onNoteOn(byte ch, byte note, byte vel){
-  volume = 255;
   fadecnt = 0;
   PORTB |= PORTD0;  // LED ON
   tfreq = pgm_read_word(freqs + note);
   sfreq = (tfreq - dfreq) / DIV_PORTA;
+  if(volume == 0){
+    phaccu = 0xffffffff - (r*sfreq);
+  }
+  volume = 255;
   portacnt = PORTA_MAX;
   lastnote = note;
 }
@@ -139,6 +143,7 @@ void onNoteOff(byte ch, byte note, byte vel){
   if(note == lastnote){
     PORTB &= ~PORTD0;  // LED OFF
     fadecnt = FADE_MAX;
+
   }
 }
 
@@ -161,11 +166,21 @@ void onCtlChange(byte ch, byte num, byte value){
   }
 }
 
+volatile int i;
+
 void setup() {
   wdt_enable(WDTO_2S);
   DIDR0 |= 0x18;               // ADC2D ADC3D Digital Input Disable
   DDRB |= (PORTD4 | PORTD0);   // D4(OSC1)  D0(LED)
 
+/*
+  PORTB |= PORTD0;  // LED ON
+  for(i=0;i<30000;i++){
+    portacnt++;
+  }
+  PORTB &= ~PORTD0;  // LED ON
+  portacnt = 0;
+*/
   UsbMidi.init();
   UsbMidi.setHdlNoteOff(onNoteOff);
   UsbMidi.setHdlNoteOn(onNoteOn);
@@ -178,6 +193,7 @@ void setup() {
   tword_m=r*dfreq;
   volume = 0;
 
+  TIMSK &= ~(1 << TOIE0);          //  disable timer 1 Interrupt
   TIMSK |= (1 << TOIE1);          //  enable timer 1 Interrupt
 }
 
@@ -185,6 +201,7 @@ void loop() {
   portamento();
   fadeout();
   lfo();
+  levVol = level*volume;
   wdt_reset();
   UsbMidi.update();
 }
@@ -196,7 +213,7 @@ ISR(TIMER1_OVF_vect){
     phaccu=phaccu+tword_m;
     icnt=phaccu >> 24;
     v = (int)pgm_read_byte_near(sine256 + icnt);  
-    OCR1B = (byte)(127 + (((v - 127)*level * volume) >> shiftvalue));
+    OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
   }
 }
 
