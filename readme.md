@@ -33,24 +33,52 @@ attiny45-16.build.core=arduino
 attiny45-16.build.variant=tiny8
 ```
 
-### Libraryフォルダへインストール
-
-UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに入れて、Arduino IDEを再起動すれば使えるようになります。
-
-### examples
-
-利用例は、`/examples/ATTiny45_Sounder3/ATTiny45_Sounder3.ino` を見てください。
-
-これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
-オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。
-
 ## 配線
+
+ユニバーサル基板で工作がしやすい標準サイズのUSB-Bコネクタと実体配線のしやすさの方を優先して、D+はINT0(D2)の代わりにPCINT1(D1)に繋いでいます。なので、シビアな使い方には向いてないかもしれません。
 
 ![schematic](schema.png)
 
 - USB電源で動きますが、ATTiny45には5Vを供給してください。
 - USBのD-を7番PIN、D+を6番PINに接続します。ツェナーダイオードで3.3Vに降圧させます。
 - Arduino ISPを想定してますので、リセットPINは空けといてください。
+
+配線を変える場合、配線に合わせて`usbconfig.h`の`USB_CFG_DPLUS_BIT`などの設定値を変更してください。
+
+### Libraryフォルダへインストール
+
+UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに入れて、Arduino IDEを再起動すれば使えるようになります。
+
+### examples
+
+####  シンセモドキ
+
+`/examples/ATTiny45_Sounder3/ATTiny45_Sounder3.ino`
+
+これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
+オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。
+
+配線は、![MIDI部分の配線図](schema.png)に加え、D4（3番PIN）へオーディオ出力を追加しています。
+オーディオ出力の先は、ローパスフィルタや、オペアンプ、スピーカーなどを追加すると良いと思います。
+
+ROM容量はパツパツですが、一応ATTiny45にも収まるように作っています。
+
+#### 「ちーん」
+
+`/examples/ATTiny45_CheenSounder02/ATTiny45_CheenSounder02.ino`
+
+一応、MIDI入出力の例として、最近よく持ち歩いてる「ち〜ん」と鳴るアレのファームを公開しておきます。
+
+[makerhub](https://makershub.jp/make/453)
+[youtube](https://www.youtube.com/watch?v=1L06lI9XeK0)
+
+配線は、同じものが作りたいというニーズがあると思えないので、ココには詳細は書きませんが、![MIDI部分の配線図](schema.png)から下記のように修正しています。
+
+- D1 (6番PIN) USB D+ (変わらず)
+- D2 (7番PIN) USB D- (変わらず)
+- D3 (2番PIN) に抵抗経由でMOS-FETのゲートを接続。（FETの向こう側にソレノイドを繋いでベルを叩く仕掛けです）
+- D4 (3番PIN) にLEDを接続
+- D0 (5番PIN) にスイッチを接続
 
 
 ## ベース
