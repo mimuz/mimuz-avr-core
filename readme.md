@@ -84,7 +84,7 @@ ROM容量はパツパツですが、一応ATTiny45にも収まるように作っ
 ## ベース
 
 V-USBをはじめ、下記ソースをベースにしています。
-なので、ライセンスは下記コードのライセンス（非商用に限りGNUv2）に準じます。
+なので、ライセンスは下記コードのライセンス（非商用に限りGPLv2）に準じます。
 
 - V-USB by Objective Development Software GmbH
 	http://www.obdev.at/products/vusb/index.html
