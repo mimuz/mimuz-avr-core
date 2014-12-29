@@ -5,6 +5,12 @@ This is a simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) M
 Arduino環境から、ATTiny45/85/44/84を使ったUSB-MIDIデバイスを作るためのシンプルなライブラリです。
 [V-USB](http://www.obdev.at/products/vusb/index.html)をベースにしています。
 
+今のところ、下記機能の送受信にのみ対応しています。
+
+- MIDI NOTE ON
+- MIDI NOTE OFF
+- MIDI Control Change
+
 ## 使い方
 
 ### 準備
