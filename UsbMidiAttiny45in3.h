@@ -339,6 +339,9 @@ public:
 	}
 
 	void init(){
+#if defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+		ACSR |= (1<<ACD); // Disable analog comparator
+#endif
 		cli();
 		calibrateOscillator();
 		usbInit();

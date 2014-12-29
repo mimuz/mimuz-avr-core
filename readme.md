@@ -1,10 +1,9 @@
 # UsbMidiAttiny45in3
 
-This is a simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATTiny45/85.
+This is a simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATTiny45/85/44/84.
 
-Arduino環境から、ATTiny45/85を使ったUSB-MIDIデバイスを作るためのシンプルなライブラリです。
+Arduino環境から、ATTiny45/85/44/84を使ったUSB-MIDIデバイスを作るためのシンプルなライブラリです。
 [V-USB](http://www.obdev.at/products/vusb/index.html)をベースにしています。
-
 
 ## 使い方
 
@@ -33,7 +32,24 @@ attiny45-16.build.core=arduino
 attiny45-16.build.variant=tiny8
 ```
 
+ATTiny44/84は16Mhzの外部クリスタルを接続してください。
+ATTiny44の場合のboards.txtの定義例です。
+
+```boards.txt
+attiny44-16.name=ATtiny44 (external 16 MHz clock)
+attiny44-16.bootloader.low_fuses=0xfe
+attiny44-16.bootloader.high_fuses=0xdf
+attiny44-16.bootloader.extended_fuses=0xff
+attiny44-16.upload.maximum_size=4096
+attiny44-16.build.mcu=attiny44
+attiny44-16.build.f_cpu=16000000L
+attiny44-16.build.core=arduino
+attiny44-16.build.variant=tiny14
+```
+
 ## 配線
+
+### ATTiny45/85
 
 ユニバーサル基板で工作がしやすい標準サイズのUSB-Bコネクタと実体配線のしやすさの方を優先して、D+はINT0(D2)の代わりにPCINT1(D1)に繋いでいます。なので、シビアな使い方には向いてないかもしれません。
 
@@ -45,13 +61,25 @@ attiny45-16.build.variant=tiny8
 
 配線を変える場合、配線に合わせて`usbconfig.h`の`USB_CFG_DPLUS_BIT`などの設定値を変更してください。
 
+### ATTiny44/84
+
+USBのD+は12番PIN、D-は13番PINに接続してください。
+あとはATTiny45/85の場合と同様です。
+
 ### Libraryフォルダへインストール
 
 UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに入れて、Arduino IDEを再起動すれば使えるようになります。
 
 ### examples
 
-####  シンセモドキ
+####  LED Blink (For ATTiny45/85/44/84)
+
+`/examples/ATTiny_VUSBMIDI_BlinkTest/ATTiny_VUSBMIDI_BlinkTest.ino`
+
+Note ONを受け取ったらLEDを光らせるだけのデモです。
+導通テストなどにご利用ください。
+
+####  シンセモドキ (For ATTiny45/85)
 
 `/examples/ATTiny45_Sounder3/ATTiny45_Sounder3.ino`
 
@@ -63,7 +91,7 @@ UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに�
 
 ROM容量はパツパツですが、一応ATTiny45にも収まるように作っています。
 
-#### 「ちーん」
+#### 「ちーん」 (For ATTiny45/85)
 
 `/examples/ATTiny45_CheenSounder02/ATTiny45_CheenSounder02.ino`
 

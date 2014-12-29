@@ -18,7 +18,7 @@
 
 #include "UsbMidiAttiny45in3.h"
 #include <avr/interrupt.h>
-#include <avr/pgspace.h>
+#include <avr/pgmspace.h>
 #include <avr/wdt.h>
 
 #define PORTD0 0x01
