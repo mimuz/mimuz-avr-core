@@ -106,13 +106,8 @@ ROM容量はパツパツですが、一応ATTiny45にも収まるように作っ
 [makerhub](https://makershub.jp/make/453)
 [youtube](https://www.youtube.com/watch?v=1L06lI9XeK0)
 
-配線は、同じものが作りたいというニーズがあると思えないので、ココには詳細は書きませんが、[上のMIDI部分の配線図](schema.png)から下記のように修正しています。
-
-- D1 (6番PIN) USB D+ (変わらず)
-- D2 (7番PIN) USB D- (変わらず)
-- D3 (2番PIN) に抵抗経由でMOS-FETのゲートを接続。（FETの向こう側にソレノイドを繋いでベルを叩く仕掛けです）
-- D4 (3番PIN) にLEDを接続
-- D0 (5番PIN) にスイッチを接続
+回路図は下記の通りです。
+![回路図](cheen-schematic.png)
 
 
 ## ベースソフトウエアとライセンス
