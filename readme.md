@@ -1,28 +1,35 @@
-# UsbMidiAttiny45in3
+# arduino-vusb-midi-attiny
 
-This is a simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATTiny45/85/44/84.
+A very simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATtiny Microcontroller.
 
-Arduino環境から、ATTiny45/85/44/84を使ったUSB-MIDIデバイスを作るためのシンプルなライブラリです。
-[V-USB](http://www.obdev.at/products/vusb/index.html)をベースにしています。
+ATtiny向けのシンプルなArduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDIライブラリです。
 
-今のところ、下記機能の送受信にのみ対応しています。
+今のところ下記MIDIメッセージの送受信にのみ対応しています。
 
 - MIDI NOTE ON
 - MIDI NOTE OFF
 - MIDI Control Change
 
+The following ATtiny AVR are supported:
+下記ATtiny AVRをサポートしています。
+
+- ATtiny45/85 : with Arduino IDE 1.0.x or 1.6.3
+- ATtiny44/84 : with Arduino IDE 1.0.x or 1.6.3
+- ATtiny841 (maybe can support 441 but i cannot test it yet.) : Only Support Arduino IDE 1.6.3
+
 ## 使い方
 
 ### 準備
 
-ArduinoでATTiny45/85を開発するために、[kosakalabさんのhardware.zip](http://make.kosakalab.com/arduino/use/source/hardware.zip)を使わせていただいてます。
-あわせて、ATTiny45/85をArduino ISPで焼き込む環境が必要です。
-詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照して、ATTiny45/85にファームウェアを書き込み環境を準備してください。
+ArduinoでATtinyを開発するために、[kosakalabさんのhardware.zip](http://make.kosakalab.com/arduino/use/source/hardware.zip)を使わせていただいてます。
+あわせて、ATtinyをArduino ISPで焼き込む環境が必要です。
+詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照して、ATtinyにファームウェアを書き込み環境を準備してください。
 
-### boards.txtへの追加
+### boards.txt configuration
 
-ATTiny45/85は16.5Mhzで使います。
-このため、例えば、ATTiny45の場合、boards.txtに下記のように定義を追加してください。
+Arduino IDEの1.6.xではboard.txtの記述方法が変更されています。
+
+#### ATTiny45 (16.5Mhz Internal Oscillator) for Arduino IDE 1.0.x
 
 ```boards.txt
 attiny45-16.name=ATtiny45 (internal 16.5 MHz clock)
@@ -38,11 +45,10 @@ attiny45-16.build.core=arduino
 attiny45-16.build.variant=tiny8
 ```
 
-ATTiny44/84は16Mhzの外部クリスタルを接続してください。
-ATTiny44の場合のboards.txtの定義例です。
+#### ATTiny44 (16.0Mhz External Oscillator) for Arduino IDE 1.0.x
 
 ```boards.txt
-attiny44-16.name=ATtiny44 (external 16 MHz clock)
+attiny44-16.name=ATtiny44 (external 16.0 MHz clock)
 attiny44-16.bootloader.low_fuses=0xfe
 attiny44-16.bootloader.high_fuses=0xdf
 attiny44-16.bootloader.extended_fuses=0xff
@@ -108,7 +114,6 @@ ROM容量はパツパツですが、一応ATTiny45にも収まるように作っ
 
 回路図は下記の通りです。
 ![回路図](cheen-schematic.png)
-
 
 ## ベースソフトウエアとライセンス
 

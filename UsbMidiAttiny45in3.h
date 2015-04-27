@@ -38,7 +38,7 @@ typedef uint8_t byte;
 // Appendix B. Example: Simple MIDI Adapter (Informative)
 // B.1 Device Descriptor
 //
-static PROGMEM char deviceDescrMIDI[] = {	/* USB device descriptor */
+PROGMEM const char deviceDescrMIDI[] = {	/* USB device descriptor */
 	18,			/* sizeof(usbDescriptorDevice): length of descriptor in bytes */
 	USBDESCR_DEVICE,	/* descriptor type */
 	0x10, 0x01,		/* USB version supported */
@@ -56,7 +56,7 @@ static PROGMEM char deviceDescrMIDI[] = {	/* USB device descriptor */
 };
 
 // B.2 Configuration Descriptor
-static PROGMEM char configDescrMIDI[] = {	/* USB configuration descriptor */
+PROGMEM const char configDescrMIDI[] = {	/* USB configuration descriptor */
 	9,			/* sizeof(usbDescrConfig): length of descriptor in bytes */
 	USBDESCR_CONFIG,	/* descriptor type */
 	101, 0,			/* total length of data returned (including inlined descriptors) */
@@ -220,6 +220,7 @@ uchar usbFunctionDescriptor(usbRequest_t * rq)
 
 static uchar sendEmptyFrame;
 
+
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
@@ -227,6 +228,8 @@ static uchar sendEmptyFrame;
 #ifdef __cplusplus
 extern "C"{
 #endif 
+
+#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
 
 static void calibrateOscillator(void)
 {
@@ -258,10 +261,14 @@ static void calibrateOscillator(void)
     OSCCAL = optimumValue;
 }
 
+#endif
+
 void hadUsbReset(void)
 {
 	cli();
+#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
 	calibrateOscillator();
+#endif
 	sei();
 }
 
@@ -341,9 +348,19 @@ public:
 	void init(){
 #if defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
 		ACSR |= (1<<ACD); // Disable analog comparator
+//		PCMSK0 = 0;
+
+#elif defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
+		ACSR0A |= (1<<ACD0); // Disable analog comparator
+		ACSR1A |= (1<<ACD1); // Disable analog comparator
+		SREG |= 0x80; // I bit (0x80) Set to global interrupt enable
+//		PCMSK = 0;
 #endif
+
 		cli();
+#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
 		calibrateOscillator();
+#endif
 		usbInit();
 		usbDeviceDisconnect();
 		_delay_ms(250);
@@ -357,7 +374,13 @@ public:
 	void update() {
 		usbPoll();
 	}
-  
+
+	void check() {
+		while (!usbInterruptIsReady()) {
+			usbPoll();
+		}
+	}
+
 	void sendNoteOn(byte ch, byte note, byte vel){
 		buffer[0] = 0x09;
 		buffer[1] = 0x90 | ch;
@@ -399,7 +422,6 @@ private:
 
 	void sendMidiMessage(byte *data, byte size) {
 		while (!usbInterruptIsReady()) {
-//			wdt_reset();
 			usbPoll();
 		}
    	usbSetInterrupt(data, size);

@@ -50,7 +50,7 @@ section at the end of this file).
 #define USB_CFG_DMINUS_BIT      2
 #define USB_CFG_DPLUS_BIT       1
 
-#elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 
 #define USB_CFG_IOPORTNAME      A
 #define USB_CFG_DMINUS_BIT      0
@@ -393,8 +393,8 @@ extern void hadUsbReset(void);
 #define USB_INTR_PENDING        GIFR
 #define USB_INTR_PENDING_BIT    PCIF
 #define USB_INTR_VECTOR         SIG_PIN_CHANGE
-
-#elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+ 
+#elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 
 #define USB_INTR_CFG            PCMSK0
 #define USB_INTR_CFG_SET        (1 << PCINT1)
