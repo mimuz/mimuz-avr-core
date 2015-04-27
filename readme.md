@@ -25,9 +25,9 @@ ArduinoでATtinyを開発するために、[kosakalabさんのhardware.zip](http
 あわせて、ATtinyをArduino ISPで焼き込む環境が必要です。
 詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照して、ATtinyにファームウェアを書き込み環境を準備してください。
 
-### boards.txt configuration
+### boards.txt configuration (for Arduino IDE 1.0.x)
 
-Arduino IDEの1.6.xではboard.txtの記述方法が変更されています。
+Arduino IDEの1.0.xのboard.txt記述例です。
 
 #### ATTiny45 (16.5Mhz Internal Oscillator) for Arduino IDE 1.0.x
 
@@ -73,7 +73,7 @@ attiny44-16.build.variant=tiny14
 
 配線を変える場合、配線に合わせて`usbconfig.h`の`USB_CFG_DPLUS_BIT`などの設定値を変更してください。
 
-### ATTiny44/84
+### ATTiny44/84/841
 
 USBのD+は12番PIN、D-は13番PINに接続してください。
 あとはATTiny45/85の場合と同様です。
