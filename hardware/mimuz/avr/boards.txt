@@ -1,0 +1,156 @@
+# ----------------------------------------------------------
+# mi:muz:prot#1 (ATtiny45 16.5Mhz)
+#                    +------+
+#       RESET A0 PB5 |1    8| VCC
+#             A3 PB3 |2    7| PB2 A1 INT0    (USB D-)
+#        OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
+#                GND |4    5| PB0 OC0A       (LED)
+#                    +------+
+
+mimuz-prot1-45.name=prot1(t45/16.5M/D+PB1,D-PB2)
+mimuz-prot1-45.bootloader.tool=avrdude
+mimuz-prot1-45.bootloader.low_fuses=0xe1
+mimuz-prot1-45.bootloader.high_fuses=0xdf
+mimuz-prot1-45.bootloader.extended_fuses=0xff
+mimuz-prot1-45.upload.maximum_size=4096
+mimuz-prot1-45.build.mcu=attiny45
+mimuz-prot1-45.build.f_cpu=16500000L
+mimuz-prot1-45.build.core=arduino:arduino
+mimuz-prot1-45.build.variant=tiny8
+mimuz-prot1-45.upload.maximum_data_size=256
+mimuz-prot1-45.build.board=MIMUZ_PROT1
+mimuz-prot1-45.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:prot#1 (ATtiny85 16.5Mhz)
+
+mimuz-prot1-85.name=prot1(t85/16.5M/D+PB1,D-PB2)
+mimuz-prot1-85.bootloader.tool=avrdude
+mimuz-prot1-85.bootloader.low_fuses=0xe1
+mimuz-prot1-85.bootloader.high_fuses=0xdf
+mimuz-prot1-85.bootloader.extended_fuses=0xff
+mimuz-prot1-85.upload.maximum_size=8192
+mimuz-prot1-85.build.mcu=attiny85
+mimuz-prot1-85.build.f_cpu=16500000L
+mimuz-prot1-85.build.core=arduino:arduino
+mimuz-prot1-85.build.variant=tiny8
+mimuz-prot1-85.upload.maximum_data_size=512
+mimuz-prot1-85.build.board=MIMUZ_PROT1
+mimuz-prot1-85.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:prot#2 (ATtiny44A 16.0Mhz)
+#                     +-------+
+#                  VCC|1    14|GND
+#                XTAL1|2    13|PA0/A0 (USB D-)
+#                XTAL2|3    12|PA1/A1 (USB D+) 
+#                RESET|4    11|PA2/A2
+#        (LED)     PB2|5    10|PA3/A3
+#               A7/PA7|6     9|PA4/A4/SCL/SCK
+#      MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO
+#                     +-------+
+
+mimuz-prot2-44.name=prot2(t44/16.0M/D+PA1,D-PA0)
+mimuz-prot2-44.bootloader.tool=avrdude
+mimuz-prot2-44.bootloader.low_fuses=0xfe
+mimuz-prot2-44.bootloader.high_fuses=0xdf
+mimuz-prot2-44.bootloader.extended_fuses=0xff
+mimuz-prot2-44.upload.maximum_size=4096
+mimuz-prot2-44.build.mcu=attiny44
+mimuz-prot2-44.build.f_cpu=16000000L
+mimuz-prot2-44.build.core=arduino:arduino
+mimuz-prot2-44.build.variant=tiny14
+mimuz-prot2-44.upload.maximum_data_size=256
+mimuz-prot2-44.build.board=MIMUZ_PROT2
+mimuz-prot2-44.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:prot#2 (ATtiny841 16.0Mhz)
+
+mimuz-prot2-841.name=prot2(t841/16.0M/D+PA1,D-PA0)
+mimuz-prot2-841.bootloader.tool=avrdude
+mimuz-prot2-841.bootloader.unlock_bits=0xff
+mimuz-prot2-841.bootloader.lock_bits=0xff
+mimuz-prot2-841.bootloader.low_fuses=0xee
+mimuz-prot2-841.bootloader.high_fuses=0xdf
+mimuz-prot2-841.bootloader.extended_fuses=0xff
+mimuz-prot2-841.upload.maximum_size=8192
+mimuz-prot2-841.build.mcu=attiny841
+mimuz-prot2-841.build.f_cpu=16000000L
+mimuz-prot2-841.build.core=arduino:arduino
+mimuz-prot2-841.build.variant=tiny14
+mimuz-prot2-841.upload.maximum_data_size=512
+mimuz-prot2-841.build.board=MIMUZ_PROT2
+mimuz-prot2-841.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:prot#3 (ATtiny45 16.5Mhz)
+#                    +------+
+#       RESET A0 PB5 |1    8| VCC
+# (USB D-)    A3 PB3 |2    7| PB2 A1 INT0    
+# (LED)  OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
+#                GND |4    5| PB0 OC0A
+#                    +------+
+
+mimuz-prot3-45.name=prot3(t45/16.5M/D+PB1,D-PB3)
+mimuz-prot3-45.bootloader.tool=avrdude
+mimuz-prot3-45.bootloader.low_fuses=0xe1
+mimuz-prot3-45.bootloader.high_fuses=0xdf
+mimuz-prot3-45.bootloader.extended_fuses=0xff
+mimuz-prot3-45.upload.maximum_size=4096
+mimuz-prot3-45.build.mcu=attiny45
+mimuz-prot3-45.build.f_cpu=16500000L
+mimuz-prot3-45.build.core=arduino:arduino
+mimuz-prot3-45.build.variant=tiny8
+mimuz-prot3-45.upload.maximum_data_size=256
+mimuz-prot3-45.build.board=MIMUZ_PROT3
+mimuz-prot3-45.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:prot#3 (ATtiny85 16.5Mhz)
+
+mimuz-prot3-85.name=prot3(t85/16.5M/D+PB1,D-PB3)
+mimuz-prot3-85.bootloader.tool=avrdude
+mimuz-prot3-85.bootloader.low_fuses=0xe1
+mimuz-prot3-85.bootloader.high_fuses=0xdf
+mimuz-prot3-85.bootloader.extended_fuses=0xff
+mimuz-prot3-85.upload.maximum_size=8192
+mimuz-prot3-85.build.mcu=attiny85
+mimuz-prot3-85.build.f_cpu=16500000L
+mimuz-prot3-85.build.core=arduino:arduino
+mimuz-prot3-85.build.variant=tiny8
+mimuz-prot3-85.upload.maximum_data_size=512
+mimuz-prot3-85.build.board=MIMUZ_PROT3
+mimuz-prot3-85.upload.tool=arduino:avrdude
+
+# ----------------------------------------------------------
+# mi:muz:expr#2 (ATtiny841 16.0Mhz)
+#                        +-------+
+#                     VCC|1    14|GND
+#                   XTAL1|2    13|PA0/A0 
+#                   XTAL2|3    12|PA1/A1  
+#                   RESET|4    11|PA2/A2
+#           (LED)     PB2|5    10|PA3/A3
+#                  A7/PA7|6     9|PA4/A4/SCL/SCK   (USB D-)
+# (USB D+)MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO
+#                        +-------+
+
+# mimuz-expr2.name=expr2(t841/16.0M/D+PA6,D-PA4)
+# mimuz-expr2.bootloader.tool=avrdude
+# mimuz-expr2.bootloader.unlock_bits=0xff
+# mimuz-expr2.bootloader.lock_bits=0xff
+# mimuz-expr2.bootloader.low_fuses=0xee
+# mimuz-expr2.bootloader.high_fuses=0xdf
+# mimuz-expr2.bootloader.extended_fuses=0xff
+# mimuz-expr2.upload.maximum_size=8192
+# mimuz-expr2.build.mcu=attiny841
+# mimuz-expr2.build.f_cpu=16000000L
+# mimuz-expr2.build.core=arduino:arduino
+# mimuz-expr2.build.variant=tiny14
+# mimuz-expr2.upload.maximum_data_size=512
+# mimuz-expr2.build.board=MIMUZ_EXPR_2
+# mimuz-expr2.upload.tool=arduino:avrdude
+
+
+
+
