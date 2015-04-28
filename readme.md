@@ -17,15 +17,24 @@ The following ATtiny AVR are supported:
 - ATtiny44/84 : with Arduino IDE 1.0.x or 1.6.3
 - ATtiny841 (maybe can support 441 but i cannot test it yet.) : Only Support Arduino IDE 1.6.3
 
-## 使い方
+## 準備（開発環境）
 
-### 準備
+ATtinyをArduino ISPで焼き込む環境が必要です。
 
-ArduinoでATtinyを開発するために、[kosakalabさんのhardware.zip](http://make.kosakalab.com/arduino/use/source/hardware.zip)を使わせていただいてます。
-あわせて、ATtinyをArduino ISPで焼き込む環境が必要です。
-詳細は、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)を参照して、ATtinyにファームウェアを書き込み環境を準備してください。
+### Arduino IDE 1.6.3
 
-### boards.txt configuration (for Arduino IDE 1.0.x)
+Arduino IDE ver.1.6.3用にボード設定を用意しました。
+
+`./hardware/mimuz` フォルダを、`Arduino.app/Contents/Java/hardware/`直下にコピーして、Arduino IDEを再起動してください。
+
+詳細は、`./hardware/mimuz/avr/board.txt`を参照ください。
+
+### Arduino IDE 1.0.x
+
+Arduino IDE 1.0.xをご利用の場合、[kosakalabさん「Arduino IDEでATtiny他の開発（Arduino-ISP編）」](http://make.kosakalab.com/make/electronic-work/arduino-ide-arduinoisp/)などを参照して、ATtinyにファームウェアを書き込む環境を準備してください。
+
+ただし、Arduino IDE 1.0.xではATtiny441/841はサポートされておりません。
+ATtiny441/841をご利用の際は、Arduino IDE 1.6.3をご利用ください。
 
 Arduino IDEの1.0.xのboard.txt記述例です。
 
@@ -59,41 +68,42 @@ attiny44-16.build.core=arduino
 attiny44-16.build.variant=tiny14
 ```
 
-## 配線
+## インストール（ライブラリ）
 
-### ATTiny45/85
+`libraries/VUSBMidiATtiny`フォルダをそのままArduonoのlibrariesフォルダに入れて、Arduino IDEを再起動すれば使えるようになります。
 
-ユニバーサル基板で工作がしやすい標準サイズのUSB-Bコネクタと実体配線のしやすさの方を優先して、D+はINT0(D2)の代わりにPCINT1(D1)に繋いでいます。なので、シビアな使い方には向いてないかもしれません。
+## リファレンスボード (mi:muz)
 
-![schematic](schema.png)
+下記3種類のボード設定に対応しています。
+適宜 usbconfig.hの設定を変更することで、自由にピンアサインを変更可能です。
 
-- USB電源で動きますが、ATTiny45には5Vを供給してください。
-- USBのD-を7番PIN、D+を6番PINに接続します。ツェナーダイオードで3.3Vに降圧させます。
-- Arduino ISPを想定してますので、リセットPINは空けといてください。
+### mi:muz:prot1 (ATTiny45/85)
 
-配線を変える場合、配線に合わせて`usbconfig.h`の`USB_CFG_DPLUS_BIT`などの設定値を変更してください。
+- D+ PB1
+- D- PB2
 
-### ATTiny44/84/841
+### mi:muz:prot2 (ATTiny44/84/841)
 
-USBのD+は12番PIN、D-は13番PINに接続してください。
-あとはATTiny45/85の場合と同様です。
+- D+ PA1
+- D- PA0
 
-### Libraryフォルダへインストール
+### mi:muz:prot3 (ATTiny45/85)
 
-UsbMidiAttiny45in3フォルダをそのままArduonoのlibrariesフォルダに入れて、Arduino IDEを再起動すれば使えるようになります。
+- D+ PB1
+- D- PB3
 
-### examples
+## examples
 
-####  LED Blink (For ATTiny45/85/44/84)
+### blink (For ATTiny45/85/44/84/841)
 
-`/examples/ATTiny_VUSBMIDI_BlinkTest/ATTiny_VUSBMIDI_BlinkTest.ino`
+`/examples/blink/blink.ino`
 
 Note ONを受け取ったらLEDを光らせるだけのデモです。
 導通テストなどにご利用ください。
 
-####  シンセモドキ (For ATTiny45/85)
+### シンセモドキ (For mi:muz:prot1 ATTiny45/85)
 
-`/examples/ATTiny45_Sounder3/ATTiny45_Sounder3.ino`
+`/examples/sounder/sounder.ino`
 
 これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
 オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////
-// ATTiny45 Sounder3
+// sounder
 //////////////////////////////////////////////////////////////
 // Features:
-// CC:1 = OSC Change
+// CC:1 = Distotion Mode
 // CC:2 = Portamento Time
 // CC:3 = Sustain Time
 // CC:4 = LFO Time
@@ -48,9 +48,9 @@ PROGMEM const uchar sine256[] = {
 };
 
 int dfreq;
-volatile unsigned long phaccu;
-volatile unsigned long tword_m;
-volatile unsigned long r = 531014; // 265507*2
+volatile unsigned int phaccu;
+volatile unsigned int tword_m;
+volatile unsigned int r = 4; // >> 7
 volatile byte icnt;
 volatile byte volume = 0;
 
@@ -199,9 +199,8 @@ ISR(TIMER1_OVF_vect){
   ex ^= 0x01;
   if(ex){
     phaccu=phaccu+tword_m;
-    icnt=phaccu >> 24;
-    v = sine256[icnt];
-//    v = (int)pgm_read_byte_near(sine256 + icnt);  
+    icnt=phaccu >> 6;
+    v = (int)pgm_read_byte_near(sine256 + icnt);  
     OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
   }
 }
