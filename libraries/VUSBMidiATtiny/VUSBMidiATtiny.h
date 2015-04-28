@@ -18,8 +18,8 @@ Licenses:
 
 */
 
-#ifndef __UsbMidiAttiny45in_h__
-#define __UsbMidiAttiny45in_h__
+#ifndef __VUSBMidiATtiny_h__
+#define __VUSBMidiATtiny_h__
 
 #include <avr/pgmspace.h>
 #include <avr/io.h>
@@ -431,4 +431,4 @@ private:
 
 UsbMidiDevice UsbMidi = UsbMidiDevice();
 
-#endif // __UsbMidiAttiny45in_h__
+#endif // __VUSBMidiATtiny_h__

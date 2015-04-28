@@ -11,7 +11,10 @@
 //
 //////////////////////////////////////////////////////////////
 
-#include "UsbMidiAttiny45in3.h"
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__)
+#include "VUSBMidiATtiny.h"
+#endif
+
 #include <avr/wdt.h>
 
 #define PORTD0 0x01

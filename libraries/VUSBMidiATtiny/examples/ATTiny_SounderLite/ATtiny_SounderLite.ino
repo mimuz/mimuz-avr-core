@@ -16,7 +16,7 @@
 //                    +------+
 //////////////////////////////////////////////////////////////
 
-#include "UsbMidiAttiny45in3.h"
+#include "VUSBMidiATtiny.h"
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <avr/wdt.h>
@@ -28,7 +28,7 @@
 #define PORTD4 0x10
 #define PORTD5 0x20
 
-PROGMEM int freqs[] = {
+PROGMEM const unsigned int freqs[] = {
   8,8,9,9,10,11,11,12,13,14,15,15,16,17,18,19,
   21,22,23,24,26,28,29,31,33,35,37,39,41,44,46,49,
   52,55,58,62,65,69,73,78,82,87,93,98,104,110,117,123,
@@ -39,7 +39,7 @@ PROGMEM int freqs[] = {
   5274,5588,5920,6272,6645,7040,7459,7902,8372,8870,9397,9956,10548,11175,11840,12544
 };
 
-PROGMEM prog_uchar sine256[] = {
+PROGMEM const uchar sine256[] = {
   127,130,133,136,139,143,146,149,152,155,158,161,164,167,170,173,176,178,181,184,187,190,192,195,198,200,203,205,208,210,212,215,217,219,221,223,225,227,229,231,233,234,236,238,239,240,
   242,243,244,245,247,248,249,249,250,251,252,252,253,253,253,254,254,254,254,254,254,254,253,253,253,252,252,251,250,249,249,248,247,245,244,243,242,240,239,238,236,234,233,231,229,227,225,223,
   221,219,217,215,212,210,208,205,203,200,198,195,192,190,187,184,181,178,176,173,170,167,164,161,158,155,152,149,146,143,139,136,133,130,127,124,121,118,115,111,108,105,102,99,96,93,90,87,84,81,78,
@@ -52,7 +52,7 @@ volatile unsigned long phaccu;
 volatile unsigned long tword_m;
 volatile unsigned long r = 531014; // 265507*2
 volatile byte icnt;
-volatile int volume = 0;
+volatile byte volume = 0;
 
 #define SHIFT_BASE 8
 volatile byte shiftvalue = SHIFT_BASE;
@@ -60,7 +60,7 @@ volatile byte level = 1;
 
 volatile int levVol;
 
-#define FADE_MAX 256
+#define FADE_MAX 255
 unsigned int fade_time = 1;
 byte lastnote = 0;
 unsigned int fadecnt = 0;
@@ -77,11 +77,11 @@ void fadeout(void){
   }
 }
 
-#define PORTA_MAX 256
+#define PORTA_MAX 255
 #define DIV_PORTA 32
-int porta_time = PORTA_MAX;
+byte porta_time = PORTA_MAX;
 
-int portacnt = 0;
+byte portacnt = 0;
 byte divcnt = 0;
 int tfreq = 0;
 int sfreq = 0;
@@ -105,10 +105,10 @@ void portamento(void){
   }    
 }
 
-#define LFO_MAX 256
+#define LFO_MAX 255
 #define DIV_LFO 8
-int lfo_time = LFO_MAX;
-int lfocnt = 0;
+byte lfo_time = LFO_MAX;
+byte lfocnt = 0;
 byte divlfo = 0;
 
 void lfo(){
@@ -143,7 +143,6 @@ void onNoteOff(byte ch, byte note, byte vel){
   if(note == lastnote){
     PORTB &= ~PORTD0;  // LED OFF
     fadecnt = FADE_MAX;
-
   }
 }
 
@@ -166,21 +165,10 @@ void onCtlChange(byte ch, byte num, byte value){
   }
 }
 
-volatile int i;
-
 void setup() {
   wdt_enable(WDTO_2S);
   DIDR0 |= 0x18;               // ADC2D ADC3D Digital Input Disable
   DDRB |= (PORTD4 | PORTD0);   // D4(OSC1)  D0(LED)
-
-/*
-  PORTB |= PORTD0;  // LED ON
-  for(i=0;i<30000;i++){
-    portacnt++;
-  }
-  PORTB &= ~PORTD0;  // LED ON
-  portacnt = 0;
-*/
   UsbMidi.init();
   UsbMidi.setHdlNoteOff(onNoteOff);
   UsbMidi.setHdlNoteOn(onNoteOn);
@@ -212,7 +200,8 @@ ISR(TIMER1_OVF_vect){
   if(ex){
     phaccu=phaccu+tword_m;
     icnt=phaccu >> 24;
-    v = (int)pgm_read_byte_near(sine256 + icnt);  
+    v = sine256[icnt];
+//    v = (int)pgm_read_byte_near(sine256 + icnt);  
     OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
   }
 }

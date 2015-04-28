@@ -45,18 +45,20 @@ section at the end of this file).
  */
 
 #if defined (__AVR_ATtiny25__) || defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
-
 #define USB_CFG_IOPORTNAME      B
-#define USB_CFG_DMINUS_BIT      2
-#define USB_CFG_DPLUS_BIT       1
-
 #elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
-
 #define USB_CFG_IOPORTNAME      A
-#define USB_CFG_DMINUS_BIT      0
-#define USB_CFG_DPLUS_BIT       1
-
 #endif
+
+#if defined (ARDUINO_MIMUZ_PROT1)
+#define USB_CFG_DMINUS_BIT      2
+#elif defined (ARDUINO_MIMUZ_PROT3)
+#define USB_CFG_DMINUS_BIT      3
+#else
+#define USB_CFG_DMINUS_BIT      0
+#endif
+
+#define USB_CFG_DPLUS_BIT       1
 
 #define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
 /* Clock rate of the AVR in kHz. Legal values are 12000, 12800, 15000, 16000,
