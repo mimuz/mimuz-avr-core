@@ -1,4 +1,4 @@
-![mimuz-logo](mimuz.logo)
+![mimuz-logo](./mimuz.logo)
 
 # mi:muz
 
