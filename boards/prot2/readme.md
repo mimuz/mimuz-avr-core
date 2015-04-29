@@ -3,6 +3,8 @@
 ATtiny44/84/841用のV-USB MIDI Test Boardです。
 14ピンATtinyを使っているので、prot#1やprot#3より利用できるIOが多いのが特徴です。
 
+![mi:muz:prot#2](mimuz-prot2-img.png)
+
 # Version
 
 v1.0 (2015.04.29)
