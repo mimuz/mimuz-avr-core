@@ -7,9 +7,7 @@ ATtinyでMIDIを扱うためのライブラリと、実験用ボードを開発�
 ## Software
 
 - [VUSB-MIDI-ATtiny](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny) ATtinyでUSB-MIDIデバイスを作るためのArduinoライブラリ
-
 - [設定ファイル(Arduino IDE 1.6.3)](https://github.com/tadfmac/mi-muz/tree/master/arduino/hardware) Arduino IDEにmi:muzボード設定を追加するファイル
-
 - Hybrid MIDI for ATtiny (Comming Soon)
 
 ## boards
