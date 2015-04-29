@@ -26,3 +26,17 @@ ATtinyにMIDI機能を追加するライブラリとArduino IDE 1.6.3向けラ�
 - [mi:muz:prot#3](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3) ATtiny45/85用V-USB-MIDI実験用ボード。I2Cマスタ用回路入り
 - mi:muz:expr#2 ATtiny841用Hybrid-MIDI実験用ボード) [Comming Soon]
 
+## Applications
+
+`mi:muz`を使ったアプリケーションを紹介します。
+
+- [フィジカルWebアプリ「ち〜ん」](http://qiita.com/tadfmac/items/702e74efad1dd606166a) MIDIデバイス化した呼び鈴と連携するWebアプリ
+- 12ノブコントローラー ATtiny44を使った小さなフィジカルコントローラー
+- 缶インスタントバージョン [mi:muz:prot#2](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)を使った缶型コントローラー
+- あひる1 (T.B.D.)
+- あひる2 (T.B.D.)
+- シンセモドキ1号 mi:muz:prot#1にオーディオ出力回路を付けただけのシンプルなMIDI音源
+- シンセモドキ2号 mi:muz:prot#1とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作
+- シンセモドキ3号 mi:muz:prot#1とI2C接続するATtiny45×2に音源を内蔵したMIDI音源。
+
+
