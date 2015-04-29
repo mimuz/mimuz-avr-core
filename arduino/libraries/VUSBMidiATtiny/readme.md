@@ -1,4 +1,4 @@
-# mi:muz:VUSBMidiAttiny
+# VUSBMidiAttiny
 
 A very simple Arduino [V-USB](http://www.obdev.at/products/vusb/index.html) MIDI library for ATtiny Microcontroller.
 
