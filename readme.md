@@ -10,9 +10,7 @@ ATtinyでMIDIを扱うためのライブラリと、実験用ボードを開発�
 
 - [mi:muz設定ファイル (for Arduino IDE 1.6.3)](https://github.com/tadfmac/mi-muz/tree/master/arduino/hardware) Arduino IDEからmi:muz実験用ボードへスケッチを書き込む際に使う設定ファイル。
 
-### Hybrid MIDI for ATtiny (Comming Soon)
-
-(W.I.P.)
+- Hybrid MIDI for ATtiny (Comming Soon)
 
 ## boards
 
