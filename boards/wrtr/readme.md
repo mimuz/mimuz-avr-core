@@ -10,6 +10,21 @@ v1.0 (2015.04.28)
 
 ![mimuz-wrtr.png](mimuz-wrtr.png)
 
+## parts
+
+- U1:14Pin DIPソケット
+- U2:8Pin DIPソケット
+- JP1:ピンヘッダ (4PIN)
+- JP2:ピンヘッダ (4PIN)
+- QF1:丸ピンヘッダ (3PIN)
+- C1:0.1uF
+- C2:0.1uF
+- C3:10uF
+- C4:22pF
+- C5:22pF
+- R1:470Ω
+- R2:470Ω
+
 # Licenses
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">クリエイティブ・コモンズ 表示 4.0 国際 ライセンスの下に提供されています。</a>
