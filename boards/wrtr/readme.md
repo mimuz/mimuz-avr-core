@@ -2,6 +2,8 @@
 
 Arduino UNOなどをISPライターにしてATtiny45,44などにプログラムを書き込むためのライターです。
 
+![mi:muz:wrtr](mimuz-wrtr-img.png)
+
 # Version
 
 v1.0 (2015.04.28)
