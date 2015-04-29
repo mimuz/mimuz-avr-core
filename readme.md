@@ -1,3 +1,5 @@
+![mimuz-logo](mimuz.logo)
+
 # mi:muz
 
 `mi:muz`はArduinoとATtinyを使ってMIDIで遊ぶプロジェクトです。
