@@ -1,6 +1,6 @@
 # mi:muz:wrtr ISP Shield for ATtiny x4/x5/x41
 
-Arduino UNOなどをISPライターにしてATtiny45,44などにプログラムを書き込むためのライターです。
+Arduino UNOなどに接続してATtiny45やATtiny44などにプログラムを書き込むためのISPライターシールドです。
 
 ![mi:muz:wrtr](mimuz-wrtr-img.png)
 
