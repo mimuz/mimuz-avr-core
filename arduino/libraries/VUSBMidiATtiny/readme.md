@@ -77,17 +77,17 @@ attiny44-16.build.variant=tiny14
 下記3種類のボード設定に対応しています。
 適宜 usbconfig.hの設定を変更することで、自由にピンアサインを変更可能です。
 
-### mi:muz:prot1 (ATTiny45/85)
+### [mi:muz:prot#1 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)
 
 - D+ PB1
 - D- PB2
 
-### mi:muz:prot2 (ATTiny44/84/841)
+### [mi:muz:prot#2 (ATTiny44/84/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)
 
 - D+ PA1
 - D- PA0
 
-### mi:muz:prot3 (ATTiny45/85)
+### [mi:muz:prot#3 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)
 
 - D+ PB1
 - D- PB3
@@ -108,22 +108,9 @@ Note ONを受け取ったらLEDを光らせるだけのデモです。
 これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
 オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。
 
-配線は、[上のMIDI部分の配線図](schema.png)に加え、D4（3番PIN）へオーディオ出力を追加しています。
-オーディオ出力の先は、ローパスフィルタや、オペアンプ、スピーカーなどを追加すると良いと思います。
+[mi:muz:prot#1 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)をベースとしてD4（3番PIN）へオーディオ出力を追加してください。
 
 ROM容量はパツパツですが、一応ATTiny45にも収まるように作っています。
-
-#### 「ちーん」 (For ATTiny45/85)
-
-`/examples/ATTiny45_CheenSounder02/ATTiny45_CheenSounder02.ino`
-
-一応、MIDI入出力の例として、最近よく持ち歩いてる「ち〜ん」と鳴るアレのファームを公開しておきます。
-
-[makerhub](https://makershub.jp/make/453)
-[youtube](https://www.youtube.com/watch?v=1L06lI9XeK0)
-
-回路図は下記の通りです。
-![回路図](cheen-schematic.png)
 
 ## ベースソフトウエアとライセンス
 
