@@ -12,8 +12,9 @@ ATtinyでMIDIを扱うためのライブラリと、実験用ボードを開発�
 
 ## boards
 
-- [mi:muz:prot#1]() (ATtiny45/85用V-USB-MIDI実験用ボード)
-- [mi:muz:prot#2]() (ATtiny44/84/841用V-USB-MIDI実験用ボード)
-- [mi:muz:prot#3]() (ATtiny45/85用V-USB-MIDI実験用ボード。I2Cマスタ用回路入り)
-- [mi:muz:expr#2]() (ATtiny841用Hybrid-MIDI実験用ボード) [Comming Soon]
+- [mi:muz:wrtr#1](https://github.com/tadfmac/mi-muz/tree/master/boards/wrtr) 8/14ピンATtiny向けの小さなISPシールド
+- mi:muz:prot#1 ATtiny45/85用V-USB-MIDI実験用ボード
+- mi:muz:prot#2 ATtiny44/84/841用V-USB-MIDI実験用ボード
+- mi:muz:prot#3 ATtiny45/85用V-USB-MIDI実験用ボード。I2Cマスタ用回路入り
+- mi:muz:expr#2 ATtiny841用Hybrid-MIDI実験用ボード) [Comming Soon]
 
