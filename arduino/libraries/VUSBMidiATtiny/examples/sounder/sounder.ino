@@ -50,7 +50,7 @@ PROGMEM const uchar sine256[] = {
 int dfreq;
 volatile unsigned int phaccu;
 volatile unsigned int tword_m;
-volatile unsigned int r = 4; // >> 7
+volatile unsigned int r = 8; // >> 7
 volatile byte icnt;
 volatile byte volume = 0;
 
@@ -199,7 +199,7 @@ ISR(TIMER1_OVF_vect){
   ex ^= 0x01;
   if(ex){
     phaccu=phaccu+tword_m;
-    icnt=phaccu >> 6;
+    icnt=phaccu >> 8;
     v = (int)pgm_read_byte_near(sine256 + icnt);  
     OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
   }
