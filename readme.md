@@ -34,7 +34,7 @@ ATtinyにMIDI機能を追加するライブラリとArduino IDE 1.6.3向けラ�
 - 12ノブコントローラー（ATtiny44を使った小さなフィジカルコントローラー）
 - 缶インスタントバージョン（[mi:muz:prot#2](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)を使った缶型コントローラー）
 - シンセモドキ1号（mi:muz:prot#1にオーディオ出力回路を付けただけのシンプルなMIDI音源）
-- シンセモドキ2号（mi:muz:prot#1とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作）
-- シンセモドキ3号（mi:muz:prot#1とI2C接続するATtiny45×2に音源を内蔵したMIDI音源）
+- シンセモドキ2号（mi:muz:prot#3とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作）
+- シンセモドキ3号（mi:muz:prot#3とI2C接続するATtiny45×2に音源を内蔵したMIDI音源）
 
 
