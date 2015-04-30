@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////
-// sounder
+// sounder (For ATtiny45/85)
 //////////////////////////////////////////////////////////////
 // Features:
 // CC:1 = Distotion Mode
@@ -7,13 +7,23 @@
 // CC:3 = Sustain Time
 // CC:4 = LFO Time
 //////////////////////////////////////////////////////////////
-// ATTiny 45/85 Pin Assignment
-//                    +------+
-//        RESET D5 A0 |      | VCC
-//              D3 A3 |      | A1 D2 INT0    (USB D-)
-//(SPEAKER)OC1B D4 A2 |      | D1 OC0B/OC1A  (USB D+) PCINT1
-//                GND |      | D0 OC0A (LED) 
-//                    +------+
+/*
+# mi:muz:prot#1
+#                        +------+
+#           RESET A0 PB5 |1    8| VCC
+#                 A3 PB3 |2    7| PB2 A1 INT0    (USB D-)
+# (Audio)    OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
+#                    GND |4    5| PB0 OC0A       (LED)
+#                        +------+
+#
+# mi:muz:prot#3
+#                        +------+
+#           RESET A0 PB5 |1    8| VCC
+# (USB D-)        A3 PB3 |2    7| PB2 A1 INT0    
+# (Audio/LED)OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
+#                    GND |4    5| PB0 OC0A
+#                        +------+
+*/
 //////////////////////////////////////////////////////////////
 
 #include "VUSBMidiATtiny.h"
@@ -28,15 +38,21 @@
 #define PORTD4 0x10
 #define PORTD5 0x20
 
+#if defined (ARDUINO_MIMUZ_PROT3)
+#define LED_PIN PORTD4
+#else
+#define LED_PIN PORTD0
+#endif
+
 PROGMEM const unsigned int freqs[] = {
-  8,8,9,9,10,11,11,12,13,14,15,15,16,17,18,19,
-  21,22,23,24,26,28,29,31,33,35,37,39,41,44,46,49,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,33,35,37,39,41,44,46,49,
   52,55,58,62,65,69,73,78,82,87,93,98,104,110,117,123,
   131,139,147,156,165,175,185,196,208,220,233,247,262,277,294,311,
   330,349,370,392,415,440,466,494,523,554,587,623,659,698,740,784,
   831,880,932,988,1047,1109,1175,1245,1319,1397,1480,1568,1661,1760,1865,1976,
-  2093,2217,2349,2489,2637,2794,2960,3136,3322,3520,3729,3951,4186,4435,4699,4978,
-  5274,5588,5920,6272,6645,7040,7459,7902,8372,8870,9397,9956,10548,11175,11840,12544
+  2093,2217,2349,2489,2637,2794,2960,3136,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
 PROGMEM const uchar sine256[] = {
@@ -50,7 +66,7 @@ PROGMEM const uchar sine256[] = {
 int dfreq;
 volatile unsigned int phaccu;
 volatile unsigned int tword_m;
-volatile unsigned int r = 8; // >> 7
+volatile unsigned int r = 16; // >> 7
 volatile byte icnt;
 volatile byte volume = 0;
 
@@ -86,6 +102,7 @@ byte divcnt = 0;
 int tfreq = 0;
 int sfreq = 0;
 boolean ex = true;
+boolean ez = true;
 
 void portamento(void){
  if(portacnt != 0){
@@ -128,7 +145,7 @@ void lfo(){
 
 void onNoteOn(byte ch, byte note, byte vel){
   fadecnt = 0;
-  PORTB |= PORTD0;  // LED ON
+  PORTB |= LED_PIN;  // LED ON
   tfreq = pgm_read_word(freqs + note);
   sfreq = (tfreq - dfreq) / DIV_PORTA;
   if(volume == 0){
@@ -141,7 +158,7 @@ void onNoteOn(byte ch, byte note, byte vel){
 
 void onNoteOff(byte ch, byte note, byte vel){
   if(note == lastnote){
-    PORTB &= ~PORTD0;  // LED OFF
+    PORTB &= ~LED_PIN;  // LED OFF
     fadecnt = FADE_MAX;
   }
 }
@@ -167,15 +184,15 @@ void onCtlChange(byte ch, byte num, byte value){
 
 void setup() {
   wdt_enable(WDTO_2S);
-  DIDR0 |= 0x18;               // ADC2D ADC3D Digital Input Disable
-  DDRB |= (PORTD4 | PORTD0);   // D4(OSC1)  D0(LED)
+  DDRB |= (PORTD4 | LED_PIN);   // D4(OSC1)
+
+  TCCR1 = 0x03; // 0x03:Prescaler=4 
+  GTCCR = 0x60; // 0x40:OCR1B PWM Mode | 0x20:OCR1B ClearCompareMatch
+
   UsbMidi.init();
   UsbMidi.setHdlNoteOff(onNoteOff);
   UsbMidi.setHdlNoteOn(onNoteOn);
   UsbMidi.setHdlCtlChange(onCtlChange);
-
-  TCCR1 = 0x03; // 0x03:Prescaler=4 
-  GTCCR = 0x60; // 0x40:OCR1B PWM Mode | 0x20:OCR1B ClearCompareMatch
 
   dfreq = pgm_read_word(freqs + 40);
   tword_m=r*dfreq;
@@ -198,10 +215,13 @@ ISR(TIMER1_OVF_vect){
   int v;
   ex ^= 0x01;
   if(ex){
-    phaccu=phaccu+tword_m;
-    icnt=phaccu >> 8;
-    v = (int)pgm_read_byte_near(sine256 + icnt);  
-    OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+    ez ^= 0x01;
+    if(ez){
+      phaccu=phaccu+tword_m;
+      icnt=phaccu >> 8;
+      v = (int)pgm_read_byte_near(sine256 + icnt);  
+      OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+    }
   }
 }
 
