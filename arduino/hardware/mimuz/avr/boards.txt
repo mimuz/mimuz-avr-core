@@ -1,10 +1,10 @@
 # ----------------------------------------------------------
 # mi:muz:prot#1 (ATtiny45 16.5Mhz)
 #                    +------+
-#       RESET A0 PB5 |1    8| VCC
-#             A3 PB3 |2    7| PB2 A1 INT0    (USB D-)
-#        OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
-#                GND |4    5| PB0 OC0A       (LED)
+#       RESET/A0/PB5 |1    8| VCC
+#             A3/PB3 |2    7| PB2/A1/INT0    (USB D-)
+#        OC1B/A2/PB4 |3    6| PB1/OC0B/OC1A  (USB D+)
+#                GND |4    5| PB0/OC0A       (LED)
 #                    +------+
 
 mimuz-prot1-45.name=prot1(t45/16.5M/D+PB1,D-PB2)
@@ -45,9 +45,9 @@ mimuz-prot1-85.upload.tool=arduino:avrdude
 #                XTAL1|2    13|PA0/A0 (USB D-)
 #                XTAL2|3    12|PA1/A1 (USB D+) 
 #                RESET|4    11|PA2/A2
-#        (LED)     PB2|5    10|PA3/A3
-#               A7/PA7|6     9|PA4/A4/SCL/SCK
-#      MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO
+#  (LED) OC0A/INT0/PB2|5    10|PA3/A3
+#          OC0B/A7/PA7|6     9|PA4/A4/SCL/SCK
+# OC1A/MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO/OC1B
 #                     +-------+
 
 mimuz-prot2-44.name=prot2(t44/16.0M/D+PA1,D-PA0)
@@ -86,10 +86,10 @@ mimuz-prot2-841.upload.tool=arduino:avrdude
 # ----------------------------------------------------------
 # mi:muz:prot#3 (ATtiny45 16.5Mhz)
 #                    +------+
-#       RESET A0 PB5 |1    8| VCC
-# (USB D-)    A3 PB3 |2    7| PB2 A1 INT0    
-# (LED)  OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
-#                GND |4    5| PB0 OC0A
+#       RESET/A0/PB5 |1    8| VCC
+# (USB D-)    A3/PB3 |2    7| PB2/A1/INT0    
+# (LED)  OC1B/A2/PB4 |3    6| PB1/OC0B/OC1A  (USB D+)
+#                GND |4    5| PB0/OC0A
 #                    +------+
 
 mimuz-prot3-45.name=prot3(t45/16.5M/D+PB1,D-PB3)
