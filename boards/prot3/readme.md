@@ -4,6 +4,8 @@ ATtiny45/84用のV-USB MIDI Test Boardです。
 V-USB-MIDIとI2Cとのブリッジ利用を想定し、USB D-をI2Cと競合しないPB3に接続しています。
 また、I2Cプルアップ用の回路も入れてあります。
 
+![mi:muz:prot#3](mimuz-prot3-img.png)
+
 # Version
 
 v1.0 (2015.04.29)
@@ -29,6 +31,11 @@ v1.0 (2015.04.29)
 - R4:470Ω
 - R5:4.7KΩ ※I2C使うときだけ接続
 - R6:4.7KΩ ※I2C使うときだけ接続
+
+# example
+
+- [blink:MIDI-INを受けてLEDチカするスケッチ](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/blink)
+- [sounder:シンセモドキ1号](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/sounder)
 
 # Licenses
 
