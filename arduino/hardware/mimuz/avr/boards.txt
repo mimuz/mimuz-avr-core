@@ -131,25 +131,25 @@ mimuz-prot3-85.upload.tool=arduino:avrdude
 #                   XTAL2|3    12|PA1/A1  
 #                   RESET|4    11|PA2/A2
 #           (LED)     PB2|5    10|PA3/A3
-#                  A7/PA7|6     9|PA4/A4/SCL/SCK   (USB D-)
-# (USB D+)MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO
+#                  A7/PA7|6     9|PA4/A4/SCL/SCK   (USB D+)
+# (USB D-)MOSI/SDA/A6/PA6|7     8|PA5/A5/MISO
 #                        +-------+
 
-# mimuz-expr2.name=expr2(t841/16.0M/D+PA6,D-PA4)
-# mimuz-expr2.bootloader.tool=arduino:avrdude
-# mimuz-expr2.bootloader.unlock_bits=0xff
-# mimuz-expr2.bootloader.lock_bits=0xff
-# mimuz-expr2.bootloader.low_fuses=0xee
-# mimuz-expr2.bootloader.high_fuses=0xdf
-# mimuz-expr2.bootloader.extended_fuses=0xff
-# mimuz-expr2.upload.maximum_size=8192
-# mimuz-expr2.build.mcu=attiny841
-# mimuz-expr2.build.f_cpu=16000000L
-# mimuz-expr2.build.core=arduino:arduino
-# mimuz-expr2.build.variant=tiny14
-# mimuz-expr2.upload.maximum_data_size=512
-# mimuz-expr2.build.board=MIMUZ_EXPR_2
-# mimuz-expr2.upload.tool=arduino:avrdude
+#mimuz-expr2.name=expr2(t841/16.0M/D+PA4,D-PA6)
+#mimuz-expr2.bootloader.tool=arduino:avrdude
+#mimuz-expr2.bootloader.unlock_bits=0xff
+#mimuz-expr2.bootloader.lock_bits=0xff
+#mimuz-expr2.bootloader.low_fuses=0xee
+#mimuz-expr2.bootloader.high_fuses=0xdf
+#mimuz-expr2.bootloader.extended_fuses=0xff
+#mimuz-expr2.upload.maximum_size=8192
+#mimuz-expr2.build.mcu=attiny841
+#mimuz-expr2.build.f_cpu=16000000L
+#mimuz-expr2.build.core=arduino:arduino
+#mimuz-expr2.build.variant=tiny14
+#mimuz-expr2.upload.maximum_data_size=512
+#mimuz-expr2.build.board=MIMUZ_EXPR2
+#mimuz-expr2.upload.tool=arduino:avrdude
 
 
 

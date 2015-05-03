@@ -54,11 +54,17 @@ section at the end of this file).
 #define USB_CFG_DMINUS_BIT      2
 #elif defined (ARDUINO_MIMUZ_PROT3)
 #define USB_CFG_DMINUS_BIT      3
+#elif defined (ARDUINO_MIMUZ_EXPR2)
+#define USB_CFG_DMINUS_BIT		6
 #else
 #define USB_CFG_DMINUS_BIT      0
 #endif
 
+#if defined (ARDUINO_MIMUZ_EXPR2)
+#define USB_CFG_DPLUS_BIT       4
+#else
 #define USB_CFG_DPLUS_BIT       1
+#endif
 
 #define USB_CFG_CLOCK_KHZ       (F_CPU/1000)
 /* Clock rate of the AVR in kHz. Legal values are 12000, 12800, 15000, 16000,
@@ -399,7 +405,12 @@ extern void hadUsbReset(void);
 #elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 
 #define USB_INTR_CFG            PCMSK0
+
+#if defined (ARDUINO_MIMUZ_EXPR2)
+#define USB_INTR_CFG_SET        (1 << PCINT4)
+#else
 #define USB_INTR_CFG_SET        (1 << PCINT1)
+#endif
 #define USB_INTR_CFG_CLR        0
 #define USB_INTR_ENABLE         GIMSK
 #define USB_INTR_ENABLE_BIT     PCIE0
