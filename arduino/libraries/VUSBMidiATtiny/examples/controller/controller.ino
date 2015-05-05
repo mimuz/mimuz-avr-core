@@ -89,7 +89,7 @@ void loop() {
   UsbMidi.update();
   trigLedOff();
   
-  int volume = analogRead(0);
+  int volume = analogRead(VOLUME_PIN);
   volume >>= 3;
 
   if((volume != oVolume)&&(oVolume != -1)){
