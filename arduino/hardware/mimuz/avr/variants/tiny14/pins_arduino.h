@@ -116,11 +116,17 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] =
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = 
 {
+                  // x4  : Tiny841 feature
   NOT_ON_TIMER,   // PA0 : 
   NOT_ON_TIMER,   // PA1 : TOCC0 : TXD0
   NOT_ON_TIMER,   // PA2 : TOCC1 : RXD0
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
   TIMER2B,        // PA3 : TOCC2 : 
   TIMER2A,        // PA4 : TOCC3 : SCK  / SCL
+#else
+  NOT_ON_TIMER,   // PA3 :  
+  NOT_ON_TIMER,   // PA4 : 
+#endif  
   TIMER1B,        // PA5 : TOCC4 : MISO
   TIMER1A,        // PA6 : TOCC5 : MOSI / SDA
   TIMER0B,        // PA7 : TOCC6 : SS
