@@ -6,6 +6,10 @@ V-USB-MIDIとI2Cとのブリッジ利用を想定し、USB D-をI2Cと競合し�
 
 ![mi:muz:prot#3](mimuz-prot3-img.png)
 
+# Pin Mapping
+
+![pin mapping](prot3-pin-mapping.png)
+
 # Version
 
 v1.0 (2015.04.29)
