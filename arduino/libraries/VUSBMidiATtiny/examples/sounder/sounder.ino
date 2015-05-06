@@ -40,6 +40,8 @@
 
 #if defined (ARDUINO_MIMUZ_PROT3)
 #define LED_PIN PORTD4
+#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#define LED_PIN PORTD2
 #else
 #define LED_PIN PORTD0
 #endif
@@ -102,7 +104,11 @@ byte divcnt = 0;
 int tfreq = 0;
 int sfreq = 0;
 boolean ex = true;
+boolean ey = true;
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
 boolean ez = true;
+boolean ez2 = true;
+#endif
 
 void portamento(void){
  if(portacnt != 0){
@@ -184,10 +190,6 @@ void onCtlChange(byte ch, byte num, byte value){
 
 void setup() {
   wdt_enable(WDTO_2S);
-  DDRB |= (PORTD4 | LED_PIN);   // D4(OSC1)
-
-  TCCR1 = 0x03; // 0x03:Prescaler=4 
-  GTCCR = 0x60; // 0x40:OCR1B PWM Mode | 0x20:OCR1B ClearCompareMatch
 
   UsbMidi.init();
   UsbMidi.setHdlNoteOff(onNoteOff);
@@ -198,8 +200,22 @@ void setup() {
   tword_m=r*dfreq;
   volume = 0;
 
-  TIMSK &= ~(1 << TOIE0);          //  disable timer 1 Interrupt
-  TIMSK |= (1 << TOIE1);          //  enable timer 1 Interrupt
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
+  DDRB |= (PORTD4 | LED_PIN);      // D4(OSC1)
+  TCCR1 = (1<<CS11)|(1<<CS10);     // 0x03:Prescaler=x4 
+  GTCCR = (1<<PWM1B)|(1<<COM1B1);  // 0x40:PWM1B = OCR1B PWM Mode | 0x20:OCR1B ClearCompareMatch
+  TIMSK &= ~(1 << TOIE0);          // disable timer 1 Interrupt
+  TIMSK |= (1 << TOIE1);           // enable timer 1 Interrupt
+#elif defined  (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__)
+  DDRB |= LED_PIN;  // PB2
+  DDRA |= 0x20;     // PA5 (OC1B)
+  TCCR1A = (1<<COM1B1)|(1<<WGM10); // OC1B PWM, PWM(WGM10)
+  TCCR1B = (1<<WGM12)|(1<<CS10);   // Prescaler=x1
+  TIMSK0 &= ~(1 << TOIE0);         // disable timer 1 Interrupt
+  TIMSK1 |= (1 << TOIE1);          // enable timer 1 Interrupt
+  OCR1A = 0x00FF;
+  OCR1BL = 0;
+#endif
 }
 
 void loop() {
@@ -211,16 +227,34 @@ void loop() {
   UsbMidi.update();
 }
 
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__)
+ISR(TIM1_OVF_vect){
+#else
 ISR(TIMER1_OVF_vect){
+#endif
   int v;
   ex ^= 0x01;
   if(ex){
-    ez ^= 0x01;
-    if(ez){
-      phaccu=phaccu+tword_m;
-      icnt=phaccu >> 8;
-      v = (int)pgm_read_byte_near(sine256 + icnt);  
-      OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+    ey ^= 0x01;
+    if(ey){
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+      ez ^=0x01;
+      if(ez){
+        ez2 ^=0x01;
+        if(ez2){
+#endif
+          phaccu=phaccu+tword_m;
+          icnt=phaccu >> 8;
+          v = (int)pgm_read_byte_near(sine256 + icnt);  
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
+          OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+          OCR1BL = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+#endif
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+        }
+      }
+#endif
     }
   }
 }
