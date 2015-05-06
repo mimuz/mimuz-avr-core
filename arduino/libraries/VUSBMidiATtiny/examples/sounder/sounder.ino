@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////
-// sounder (For ATtiny45/85)
+// sounder (For ATtiny45/85/44/84)
 //////////////////////////////////////////////////////////////
 // Features:
 // CC:1 = Distotion Mode
@@ -15,6 +15,17 @@
 # (Audio)    OC1B A2 PB4 |3    6| PB1 OC0B/OC1A  (USB D+)
 #                    GND |4    5| PB0 OC0A       (LED)
 #                        +------+
+#
+# mi:muz:prot#2
+#                     +-------+
+#                  VCC|1    14|GND
+#                XTAL1|2    13|PA0/D0/A0 (USB D-)
+#                XTAL2|3    12|PA1/D1/A1 (USB D+) 
+#                RESET|4    11|PA2/D2/A2
+#        (LED)  D8/PB2|5    10|PA3/D3/A3
+#            A7/D7/PA7|6     9|PA4/D4/A4/SCL/SCK
+#   MOSI/SDA/A6/D6/PA6|7     8|PA5/D5/A5/MISO (Audio)
+#                     +-------+
 #
 # mi:muz:prot#3
 #                        +------+
