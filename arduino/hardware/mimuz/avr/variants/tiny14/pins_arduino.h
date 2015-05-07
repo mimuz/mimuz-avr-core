@@ -24,6 +24,7 @@
   Modified 28-08-2009 for attiny84 R.Wiersma
   Modified 09-10-2009 for attiny45 A.Saporetti
   Modified 25-04-2015 for attiny841 D.F.Mac.
+  Modified 07-05-2015 add macros for attiny841 D.F.Mac.
 */
 
 #ifndef Pins_Arduino_h
@@ -135,13 +136,39 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
   NOT_ON_TIMER,   // PB0 :
 };
 
-/*
+#endif // ARDUINO_MAIN
+
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
+
+/* 
 TOCPMCOE = (1<<TOCC7OE)|(1<<TOCC6OE)|(1<<TOCC5OE)|(1<<TOCC4OE)|(1<<TOCC3OE)|(1<<TOCC2OE);
 TOCPMSA1 = (1<<TOCC5S0)|(1<<TOCC4S0);
 TOCPMSA0 = (1<<TOCC3S1)|(1<<TOCC2S1);
 */
 
+// ATTINY841 Timer Pin Setting
+//                           +-\/-+
+//                     VCC  1|    |14  GND
+//                     PB0  2|    |13  PA0  
+//                     PB1  3|    |12  PA1  (TOCC0) <disabled>
+//                     PB3  4|    |11  PA2  (TOCC1) <disabled>
+//       OC0A (TOCC7)  PB2  5|    |10  PA3  (TOCC2) OC2B
+//       OC0B (TOCC6)  PA7  6|    |9   PA4  (TOCC3) OC2A
+//       OC1A (TOCC5)  PA6  7|    |8   PA5  (TOCC4) OC1B
+//                           +----+
 
+#define T841_TIMER_PINS_DEFAULT  (TOCPMSA1 = (1<<TOCC5S0)|(1<<TOCC4S0),TOCPMSA0 = (1<<TOCC3S1)|(1<<TOCC2S1))
+#define T841_TIMER_ENABLE_OC0A  (TOCPMCOE |= (1<<TOCC7OE))
+#define T841_TIMER_ENABLE_OC0B  (TOCPMCOE |= (1<<TOCC6OE))
+#if !defined(ARDUINO_MIMUZ_EXPR2)
+#define T841_TIMER_ENABLE_OC1A  (TOCPMCOE |= (1<<TOCC5OE))
 #endif
+#define T841_TIMER_ENABLE_OC1B  (TOCPMCOE |= (1<<TOCC4OE))
+#if !defined(ARDUINO_MIMUZ_EXPR2)
+#define T841_TIMER_ENABLE_OC2A  (TOCPMCOE |= (1<<TOCC3OE))
+#endif
+#define T841_TIMER_ENABLE_OC2B  (TOCPMCOE |= (1<<TOCC2OE))
 
-#endif
+#endif // __AVR_ATtiny441__ | __AVR_ATtiny841__
+
+#endif // Pins_Arduino_h

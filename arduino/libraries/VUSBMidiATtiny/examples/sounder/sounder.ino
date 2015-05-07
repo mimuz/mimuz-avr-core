@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////
-// sounder (For ATtiny45/85/44/84)
+// sounder (For ATtiny45/85/44/84/841)
+// (CC) 2015 by D.F.Mac.
 //////////////////////////////////////////////////////////////
 // Features:
 // CC:1 = Distotion Mode
@@ -42,6 +43,10 @@
 #include <avr/pgmspace.h>
 #include <avr/wdt.h>
 
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
+#include "pins_arduino.h"  // for T841_TIMER_ENABLE_OCxx
+#endif
+
 #define PORTD0 0x01
 #define PORTD1 0x02
 #define PORTD2 0x04
@@ -51,10 +56,14 @@
 
 #if defined (ARDUINO_MIMUZ_PROT3)
 #define LED_PIN PORTD4
-#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
 #define LED_PIN PORTD2
 #else
 #define LED_PIN PORTD0
+#endif
+
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
+#define T841_TIMER_PIN_DEFAULT (TOCPMSA1 = (1<<TOCC5S0)|(1<<TOCC4S0),TOCPMSA0 = (1<<TOCC3S1)|(1<<TOCC2S1),TOCPMCOE = (1<<TOCC7OE)|(1<<TOCC6OE)|(1<<TOCC4OE)|(1<<TOCC2OE))
 #endif
 
 PROGMEM const unsigned int freqs[] = {
@@ -116,7 +125,7 @@ int tfreq = 0;
 int sfreq = 0;
 boolean ex = true;
 boolean ey = true;
-#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
 boolean ez = true;
 boolean ez2 = true;
 #endif
@@ -217,14 +226,17 @@ void setup() {
   GTCCR = (1<<PWM1B)|(1<<COM1B1);  // 0x40:PWM1B = OCR1B PWM Mode | 0x20:OCR1B ClearCompareMatch
   TIMSK &= ~(1 << TOIE0);          // disable timer 1 Interrupt
   TIMSK |= (1 << TOIE1);           // enable timer 1 Interrupt
-#elif defined  (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__)
-  DDRB |= LED_PIN;  // PB2
-  DDRA |= 0x20;     // PA5 (OC1B)
+#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
+  DDRB |= LED_PIN;                 // PB2
+  DDRA |= 0x20;                    // PA5 (OC1B)
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
+  T841_TIMER_ENABLE_OC1B;          // ENABLE OC1B PIN (Enable TOCC4. See pins_arduino.h)
+                                   // IT SHOULD CALL AFTER UsbMidi.init()!!! 
+#endif
   TCCR1A = (1<<COM1B1)|(1<<WGM10); // OC1B PWM, PWM(WGM10)
   TCCR1B = (1<<WGM12)|(1<<CS10);   // Prescaler=x1
   TIMSK0 &= ~(1 << TOIE0);         // disable timer 1 Interrupt
   TIMSK1 |= (1 << TOIE1);          // enable timer 1 Interrupt
-  OCR1A = 0x00FF;
   OCR1BL = 0;
 #endif
 }
@@ -248,7 +260,7 @@ ISR(TIMER1_OVF_vect){
   if(ex){
     ey ^= 0x01;
     if(ey){
-#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
       ez ^=0x01;
       if(ez){
         ez2 ^=0x01;
@@ -259,10 +271,10 @@ ISR(TIMER1_OVF_vect){
           v = (int)pgm_read_byte_near(sine256 + icnt);  
 #if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
           OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
-#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
           OCR1BL = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
 #endif
-#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
+#if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
         }
       }
 #endif

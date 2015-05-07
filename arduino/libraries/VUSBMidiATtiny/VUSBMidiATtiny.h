@@ -31,6 +31,10 @@ Licenses:
 
 #include "usbdrv.h"
 
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
+#include "pins_arduino.h"
+#endif
+
 typedef uint8_t byte;
 
 // This descriptor is based on http://www.usb.org/developers/devclass_docs/midi10.pdf
@@ -353,7 +357,7 @@ public:
 #elif defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 		ACSR0A |= (1<<ACD0); // Disable analog comparator
 		ACSR1A |= (1<<ACD1); // Disable analog comparator
-		SREG |= 0x80; // I bit (0x80) Set to global interrupt enable
+//		SREG |= 0x80; // I bit (0x80) Set to global interrupt enable
 //		PCMSK = 0;
 #endif
 
@@ -369,6 +373,11 @@ public:
 		cbNoteOn = NULL;
 		cbCtlChange = NULL;
 		sei();
+
+#if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
+		T841_TIMER_PINS_DEFAULT;
+#endif
+
 	}
   
 	void update() {

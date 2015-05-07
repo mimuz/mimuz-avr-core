@@ -1,6 +1,8 @@
 /*
   USB-MIDI Blink (When MIDI NOTE ON received)
   For ATTiny 45/85/44/84/841
+
+  (CC) 2015 by D.F.Mac.
 */
 
 /*
