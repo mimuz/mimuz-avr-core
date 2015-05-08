@@ -266,13 +266,15 @@ ISR(TIMER1_OVF_vect){
         ez2 ^=0x01;
         if(ez2){
 #endif
+cli();
           phaccu=phaccu+tword_m;
           icnt=phaccu >> 8;
           v = (int)pgm_read_byte_near(sine256 + icnt);  
+sei();
 #if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
-          OCR1B = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+          OCR1B = (byte)((v*levVol) >> shiftvalue);
 #elif defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
-          OCR1BL = (byte)(127 + (((v - 127)*levVol) >> shiftvalue));
+          OCR1BL = (byte)((v*levVol) >> shiftvalue);
 #endif
 #if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__) 
         }
