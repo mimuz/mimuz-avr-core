@@ -35,6 +35,8 @@ Licenses:
 #include "pins_arduino.h"
 #endif
 
+#include "queue.h"
+
 typedef uint8_t byte;
 
 // This descriptor is based on http://www.usb.org/developers/devclass_docs/midi10.pdf
@@ -233,7 +235,7 @@ static uchar sendEmptyFrame;
 extern "C"{
 #endif 
 
-#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__)
 
 static void calibrateOscillator(void)
 {
@@ -270,7 +272,7 @@ static void calibrateOscillator(void)
 void hadUsbReset(void)
 {
 	cli();
-#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__)
 	calibrateOscillator();
 #endif
 	sei();
@@ -310,32 +312,39 @@ byte checkMidiMessage(byte *pMidi){
 
 void usbFunctionWriteOut(uchar *data, uchar len)
 {
-	byte cnt;
-	byte kindmessage;
-	byte interrupt;
-	byte *pMidi;
+	cli();
+	b4arrq_push(data);
+	if(len > 4){
+		b4arrq_push(data+4);
+	}
+	sei();
+}
 
-//	cli();
-
-	interrupt = len / 4;
-	for(cnt = 0;cnt < interrupt;cnt++){
-		pMidi = data + (cnt * 4);
-		kindmessage = checkMidiMessage(pMidi);
+void processMidiMessage(){
+	uint8_t message[4];
+	uint8_t *pbuf;
+	uint8_t kindmessage;
+	if(b4arrq_num > 0){
+		pbuf = b4arrq_pop();
+		message[0] = *pbuf;
+		message[1] = *(pbuf+1);
+		message[2] = *(pbuf+2);
+		message[3] = *(pbuf+3);
+		kindmessage = checkMidiMessage(message);
 		if(kindmessage == 1){
 			if(cbNoteOff != NULL){
-				(*cbNoteOff)(*(pMidi+1)&0x0f,*(pMidi+2)&0x7f,*(pMidi+3)&0x7f);
+				(*cbNoteOff)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
 			}
 		}else if(kindmessage == 2){
 			if(cbNoteOn != NULL){
-				(*cbNoteOn)(*(pMidi+1)&0x0f,*(pMidi+2)&0x7f,*(pMidi+3)&0x7f);
+				(*cbNoteOn)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
 			}
 		}else if(kindmessage == 3){
 			if(cbCtlChange != NULL){
-				(*cbCtlChange)(*(pMidi+1)&0x0f,*(pMidi+2)&0x7f,*(pMidi+3)&0x7f);
+				(*cbCtlChange)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
 			}
 		}
 	}
-//	sei();
 }
 
 #ifdef __cplusplus
@@ -352,17 +361,14 @@ public:
 	void init(){
 #if defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) 
 		ACSR |= (1<<ACD); // Disable analog comparator
-//		PCMSK0 = 0;
 
 #elif defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 		ACSR0A |= (1<<ACD0); // Disable analog comparator
 		ACSR1A |= (1<<ACD1); // Disable analog comparator
-//		SREG |= 0x80; // I bit (0x80) Set to global interrupt enable
-//		PCMSK = 0;
 #endif
 
 		cli();
-#if !(defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__))
+#if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__)
 		calibrateOscillator();
 #endif
 		usbInit();
@@ -372,6 +378,7 @@ public:
 		cbNoteOff = NULL;
 		cbNoteOn = NULL;
 		cbCtlChange = NULL;
+		b4arrq_init();
 		sei();
 
 #if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
@@ -381,6 +388,7 @@ public:
 	}
   
 	void update() {
+		processMidiMessage();
 		usbPoll();
 	}
 
@@ -433,7 +441,7 @@ private:
 		while (!usbInterruptIsReady()) {
 			usbPoll();
 		}
-   	usbSetInterrupt(data, size);
+   		usbSetInterrupt(data, size);
  	}
 
 };

@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////
-// sounder (For ATtiny45/85/44/84/841)
-// (CC) 2015 by D.F.Mac.
+// sounder (For ATtiny45/85/44/84)
 //////////////////////////////////////////////////////////////
 // Features:
 // CC:1 = Distotion Mode
@@ -255,6 +254,7 @@ ISR(TIM1_OVF_vect){
 #else
 ISR(TIMER1_OVF_vect){
 #endif
+  sei();
   int v;
   ex ^= 0x01;
   if(ex){
