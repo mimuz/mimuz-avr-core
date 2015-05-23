@@ -21,7 +21,7 @@ ATtinyにMIDI機能を追加するライブラリとArduino IDE 1.6.3向けラ�
 実験用ボードの回路図を公開しています。
 
 - [mi:muz:wrtr](https://github.com/tadfmac/mi-muz/tree/master/boards/wrtr)（8/14ピンATtiny向けの小さなISPシールド）
-- mi:muz:prot#1（ATtiny45/85用V-USB-MIDI実験用ボード）
+- [mi:muz:prot#1](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)（ATtiny45/85用V-USB-MIDI実験用ボード）
 - [mi:muz:prot#2](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)（ATtiny44/84/841用V-USB-MIDI実験用ボード）
 - [mi:muz:prot#3](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)（ATtiny45/85用V-USB-MIDI実験用ボード。I2Cマスタ用回路入り）
 - mi:muz:expr#2（ATtiny841用Hybrid-MIDI実験用ボード）[Comming Soon]
