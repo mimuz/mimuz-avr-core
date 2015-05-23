@@ -25,17 +25,17 @@ Licenses:
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <string.h>
-//#include <avr/eeprom.h>
-#include <util/delay.h>
 #include <avr/wdt.h>
+#include <Arduino.h>
 
-#include "usbdrv.h"
+#include "./utility/usbdrv.h"
 
 #if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 #include "pins_arduino.h"
 #endif
 
 #include "queue.h"
+#include "MimuzHelper.h"
 
 typedef uint8_t byte;
 
@@ -321,27 +321,22 @@ void usbFunctionWriteOut(uchar *data, uchar len)
 }
 
 void processMidiMessage(){
-	uint8_t message[4];
 	uint8_t *pbuf;
 	uint8_t kindmessage;
 	if(b4arrq_num > 0){
 		pbuf = b4arrq_pop();
-		message[0] = *pbuf;
-		message[1] = *(pbuf+1);
-		message[2] = *(pbuf+2);
-		message[3] = *(pbuf+3);
-		kindmessage = checkMidiMessage(message);
+		kindmessage = checkMidiMessage(pbuf);
 		if(kindmessage == 1){
 			if(cbNoteOff != NULL){
-				(*cbNoteOff)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
+				(*cbNoteOff)(*(pbuf+1)&0x0f,*(pbuf+2)&0x7f,*(pbuf+3)&0x7f);
 			}
 		}else if(kindmessage == 2){
 			if(cbNoteOn != NULL){
-				(*cbNoteOn)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
+				(*cbNoteOn)(*(pbuf+1)&0x0f,*(pbuf+2)&0x7f,*(pbuf+3)&0x7f);
 			}
 		}else if(kindmessage == 3){
 			if(cbCtlChange != NULL){
-				(*cbCtlChange)(message[1]&0x0f,message[2]&0x7f,message[3]&0x7f);
+				(*cbCtlChange)(*(pbuf+1)&0x0f,*(pbuf+2)&0x7f,*(pbuf+3)&0x7f);
 			}
 		}
 	}
@@ -373,7 +368,7 @@ public:
 #endif
 		usbInit();
 		usbDeviceDisconnect();
-		_delay_ms(250);
+		delayMs(250);
 		usbDeviceConnect();
 		cbNoteOff = NULL;
 		cbNoteOn = NULL;
@@ -432,6 +427,12 @@ public:
 
 	void setHdlCtlChange(void (*fptr)(byte ch, byte num, byte value)){
  		cbCtlChange = fptr;
+	}
+
+	void delayMs(unsigned int ms){
+		for( int i=0; i<ms; i++ ) {
+	   		delayMicroseconds(1000);
+		}
 	}
 
 private:

@@ -71,25 +71,18 @@ void trigNoteOff(){
 }
 
 void setup(){
+  UsbMidi.init();
   pinMode(LED_PIN,OUTPUT);
   digitalWrite(LED_PIN,HIGH);
-  delayMs(10);
+  UsbMidi.delayMs(10);
   digitalWrite(LED_PIN,LOW);
-
-  wdt_enable(WDTO_2S);
-  UsbMidi.init();
   UsbMidi.setHdlNoteOn(onNoteOn);
+  wdt_enable(WDTO_2S);
 }
 
 void loop() {
   wdt_reset();
   UsbMidi.update();
   trigNoteOff();
-}
-
-void delayMs(unsigned int ms) {
-  for( int i=0; i<ms; i++ ) {
-    delayMicroseconds(1000);
-  }
 }
 

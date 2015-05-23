@@ -62,7 +62,7 @@
 
 int isplay = 0;
 int cnt = 0;
-int maxvalue = 640;
+int maxvalue = 5;
 int oVolume = -1;
 
 void trigLedOff(){
@@ -77,13 +77,12 @@ void trigLedOff(){
 }
 
 void setup(){
+  UsbMidi.init();
   pinMode(LED_PIN,OUTPUT);
   digitalWrite(LED_PIN,HIGH);
-  delayMs(10);
+  UsbMidi.delayMs(10);
   digitalWrite(LED_PIN,LOW);
-
   wdt_enable(WDTO_2S);
-  UsbMidi.init();
 }
 
 void loop() {
@@ -102,12 +101,6 @@ void loop() {
   }
   oVolume = volume;
 
-  delayMs(10);
-}
-
-void delayMs(unsigned int ms) {
-  for( int i=0; i<ms; i++ ) {
-    delayMicroseconds(1000);
-  }
+  UsbMidi.delayMs(10);
 }
 
