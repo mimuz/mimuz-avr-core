@@ -101,6 +101,13 @@ attiny44-16.build.variant=tiny14
 Note ONを受け取ったらLEDを光らせるだけのデモです。
 導通テストなどにご利用ください。
 
+### controller (For ATTiny45/85/44/84/841)
+
+`/examples/controller/controller.ino`
+
+アナログ入力１つのコントローラーのデモです。
+アナログ入力に可変抵抗を繋いで回せば、コントトールチェンジを送信します。
+
 ### シンセモドキ (For mi:muz:prot1 ATTiny45/85)
 
 `/examples/sounder/sounder.ino`
