@@ -1,11 +1,7 @@
 //////////////////////////////////////////////////////////////
-// sounder (For ATtiny45/85/44/84)
+// rhythmer (For ATtiny45/85/44/84)
 //////////////////////////////////////////////////////////////
 // Features:
-// CC:1 = Distotion Mode
-// CC:2 = Portamento Time
-// CC:3 = Sustain Time
-// CC:4 = LFO Time
 //////////////////////////////////////////////////////////////
 /*
 # mi:muz:prot#1
@@ -78,13 +74,28 @@ PROGMEM const unsigned int freqs[] = {
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-PROGMEM const uchar sine256[] = {
-  127,130,133,136,139,143,146,149,152,155,158,161,164,167,170,173,176,178,181,184,187,190,192,195,198,200,203,205,208,210,212,215,217,219,221,223,225,227,229,231,233,234,236,238,239,240,
-  242,243,244,245,247,248,249,249,250,251,252,252,253,253,253,254,254,254,254,254,254,254,253,253,253,252,252,251,250,249,249,248,247,245,244,243,242,240,239,238,236,234,233,231,229,227,225,223,
-  221,219,217,215,212,210,208,205,203,200,198,195,192,190,187,184,181,178,176,173,170,167,164,161,158,155,152,149,146,143,139,136,133,130,127,124,121,118,115,111,108,105,102,99,96,93,90,87,84,81,78,
-  76,73,70,67,64,62,59,56,54,51,49,46,44,42,39,37,35,33,31,29,27,25,23,21,20,18,16,15,14,12,11,10,9,7,6,5,5,4,3,2,2,1,1,1,0,0,0,0,0,0,0,1,1,1,2,2,3,4,5,5,6,7,9,10,11,12,14,15,16,18,20,21,23,25,27,29,31,
-  33,35,37,39,42,44,46,49,51,54,56,59,62,64,67,70,73,76,78,81,84,87,90,93,96,99,102,105,108,111,115,118,121,124
-};
+PROGMEM const uchar tri64[] = {
+  127,135,143,151,159,167,175,183,191,199,207,215,223,231,239,247,
+  255,255,247,239,231,223,215,207,199,191,183,175,167,159,151,143,
+  135,127,119,111,103, 95, 87, 79, 71, 63, 55, 47, 39, 27, 15,  7,
+    0,  0,  7, 15, 27, 39, 47, 55, 63, 71, 79, 87, 95,103,111,119};
+
+PROGMEM const uchar saw64[] = {
+  127,123,119,115,111,107,103, 99, 95, 91, 87, 83, 79, 75, 71, 67,
+   63, 59, 55, 51, 47, 43, 39, 35, 31, 27, 23, 19, 15, 11, 7,   3,
+  255,251,247,243,239,235,231,227,223,219,215,211,207,203,199,195,
+  191,187,183,179,175,171,167,163,159,155,151,147,143,139,135,131};
+
+PROGMEM const uchar tsaw64[] = {
+  127,119,111,103, 95, 87, 79, 71, 63, 55, 47, 39, 31, 23, 15,  7,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+  255,247,235,227,219,211,203,195,187,179,171,163,155,147,139,131};
+
+PROGMEM const uchar sqr2[] = {255,0};
+
+const uchar *osc1 = saw64;
+int osc1waveshift = 8+2;
 
 int dfreq;
 volatile unsigned int phaccu;
@@ -99,8 +110,8 @@ volatile byte level = 1;
 
 volatile int levVol;
 
-#define FADE_MAX 255
-unsigned int fade_time = 1;
+#define FADE_MAX 64
+unsigned int fade_time = 12;
 byte lastnote = 0;
 unsigned int fadecnt = 0;
 
@@ -118,7 +129,7 @@ void fadeout(void){
 
 #define PORTA_MAX 255
 #define DIV_PORTA 32
-byte porta_time = PORTA_MAX;
+byte porta_time = 16;
 
 byte portacnt = 0;
 byte divcnt = 0;
@@ -171,6 +182,9 @@ void lfo(){
 }
 
 void onNoteOn(byte ch, byte note, byte vel){
+  if(ch != 9){
+    return;
+  }
   fadecnt = 0;
   PORTB |= LED_PIN;  // LED ON
   tfreq = pgm_read_word(freqs + note);
@@ -181,16 +195,13 @@ void onNoteOn(byte ch, byte note, byte vel){
   volume = 255;
   portacnt = PORTA_MAX;
   lastnote = note;
-}
-
-void onNoteOff(byte ch, byte note, byte vel){
-  if(note == lastnote){
-    PORTB &= ~LED_PIN;  // LED OFF
-    fadecnt = FADE_MAX;
-  }
+  fadecnt = FADE_MAX;
 }
 
 void onCtlChange(byte ch, byte num, byte value){
+  if(ch != 9){
+    return;
+  }
   if(num == 1){
     level = (value / 32) + 1;
   }else if(num == 2){
@@ -213,7 +224,6 @@ void setup() {
   wdt_enable(WDTO_2S);
 
   UsbMidi.init();
-  UsbMidi.setHdlNoteOff(onNoteOff);
   UsbMidi.setHdlNoteOn(onNoteOn);
   UsbMidi.setHdlCtlChange(onCtlChange);
 
@@ -270,8 +280,8 @@ ISR(TIMER1_OVF_vect){
 #endif
 cli();
           phaccu=phaccu+tword_m;
-          icnt=phaccu >> 8;
-          v = (int)pgm_read_byte_near(sine256 + icnt);  
+          icnt=phaccu >> osc1waveshift;
+          v = (int)pgm_read_byte_near(osc1 + icnt);  
 sei();
 #if defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
           OCR1B = (byte)((v*levVol) >> shiftvalue);

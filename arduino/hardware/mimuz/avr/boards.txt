@@ -168,7 +168,22 @@ mimuz-expr2-841.upload.maximum_data_size=512
 mimuz-expr2-841.build.board=MIMUZ_EXPR2
 mimuz-expr2-841.upload.tool=arduino:avrdude
 
+# ----------------------------------------------------------
+# mi:muz:expr#1 (ATtiny85 16.5Mhz)
 
+mimuz-expr1-85.name=expr1(t85/16.5M/D+PB2,D-PB0)
+mimuz-expr1-85.bootloader.tool=arduino:avrdude
+mimuz-expr1-85.bootloader.low_fuses=0xe1
+mimuz-expr1-85.bootloader.high_fuses=0xdf
+mimuz-expr1-85.bootloader.extended_fuses=0xff
+mimuz-expr1-85.upload.maximum_size=8192
+mimuz-expr1-85.build.mcu=attiny85
+mimuz-expr1-85.build.f_cpu=16500000L
+mimuz-expr1-85.build.core=arduino:arduino
+mimuz-expr1-85.build.variant=tiny8
+mimuz-expr1-85.upload.maximum_data_size=512
+mimuz-expr1-85.build.board=MIMUZ_EXPR1
+mimuz-expr1-85.upload.tool=arduino:avrdude
 
 
 

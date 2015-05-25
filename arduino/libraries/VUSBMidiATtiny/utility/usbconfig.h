@@ -56,13 +56,15 @@ section at the end of this file).
 #define USB_CFG_DMINUS_BIT      3
 #elif defined (ARDUINO_MIMUZ_EXPR2)
 #define USB_CFG_DMINUS_BIT		6
-#else
+#else // ARDUINO_MIMUZ_PROT2, ARDUINO_MIMUZ_EXPR1
 #define USB_CFG_DMINUS_BIT      0
 #endif
 
 #if defined (ARDUINO_MIMUZ_EXPR2)
 #define USB_CFG_DPLUS_BIT       4
-#else
+#elif defined (ARDUINO_MIMUZ_EXPR1)
+#define USB_CFG_DPLUS_BIT       2
+#else // ARDUINO_MIMUZ_PROT1,ARDUINO_MIMUZ_PROT2,ARDUINO_MIMUZ_PROT3
 #define USB_CFG_DPLUS_BIT       1
 #endif
 
@@ -394,7 +396,11 @@ extern void hadUsbReset(void);
 #if defined (__AVR_ATtiny25__) || defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
 
 #define USB_INTR_CFG            PCMSK
+#if defined (ARDUINO_MIMUZ_EXPR1)
+#define USB_INTR_CFG_SET        (1 << PCINT2)
+#else
 #define USB_INTR_CFG_SET        (1 << PCINT1)
+#endif
 #define USB_INTR_CFG_CLR        0
 #define USB_INTR_ENABLE         GIMSK
 #define USB_INTR_ENABLE_BIT     PCIE

@@ -16,6 +16,10 @@
 #define LED_MASK (1 << 4)
 #define LED_DDR  DDRB
 #define LED_PORT PORTB
+#elif defined (ARDUINO_MIMUZ_EXPR1)
+#define LED_MASK (1 << 3)
+#define LED_DDR  DDRB
+#define LED_PORT PORTB
 #else
 #define LED_MASK (1 << 0)
 #define LED_DDR  DDRB

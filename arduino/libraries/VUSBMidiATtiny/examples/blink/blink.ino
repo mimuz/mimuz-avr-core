@@ -44,6 +44,8 @@
 #elif defined (__AVR_ATtiny45__) || defined (__AVR_ATtiny85__) 
 #if defined (ARDUINO_MIMUZ_PROT3)
 #define LED_PIN 4
+#elif defined (ARDUINO_MIMUZ_EXPR1)
+#define LED_PIN 3
 #else
 #define LED_PIN 0
 #endif
