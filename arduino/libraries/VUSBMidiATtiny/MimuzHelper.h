@@ -5,6 +5,8 @@
 #ifndef __MimuzHelper_h__
 #define __MimuzHelper_h__
 
+#include "pins_arduino.h"
+
 // ------------------------------------------
 // LED Macro
 // ------------------------------------------
@@ -14,10 +16,6 @@
 #define LED_PORT PORTB
 #elif defined (ARDUINO_MIMUZ_PROT3)
 #define LED_MASK (1 << 4)
-#define LED_DDR  DDRB
-#define LED_PORT PORTB
-#elif defined (ARDUINO_MIMUZ_EXPR1)
-#define LED_MASK (1 << 3)
 #define LED_DDR  DDRB
 #define LED_PORT PORTB
 #else
@@ -82,6 +80,42 @@ int analogRead841(uint8_t pin)
 }
 
 #define analogRead(x) analogRead841(x)
+
+void pinMode841(uint8_t pin, uint8_t mode)
+{
+  uint8_t bit = digitalPinToBitMask(pin);
+  volatile uint8_t *reg, *out;
+
+  if(pin < 8){
+    out = (volatile uint8_t *)&PUEA;
+    reg = (volatile uint8_t *)&DDRA;
+  }else{
+    out = (volatile uint8_t *)&PUEB;
+    reg = (volatile uint8_t *)&DDRB;
+  }
+
+  if (mode == INPUT) { 
+    uint8_t oldSREG = SREG;
+    cli();
+    *reg &= ~bit;
+    *out &= ~bit;
+    SREG = oldSREG;
+  } else if (mode == INPUT_PULLUP) {
+    uint8_t oldSREG = SREG;
+    cli();
+    *reg &= ~bit;
+    *out |= bit;
+    SREG = oldSREG;
+  } else {
+    uint8_t oldSREG = SREG;
+    cli();
+    *reg |= bit;
+    SREG = oldSREG;
+  }
+}
+
+#define pinMode(x,y) pinMode841(x,y)
+
 
 #endif // defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 
