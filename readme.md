@@ -24,8 +24,9 @@ ATtinyにMIDI機能を追加するライブラリとArduino IDE 1.6.3向けラ�
 - [mi:muz:prot#1](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)（ATtiny45/85用V-USB-MIDI実験用ボード）
 - [mi:muz:prot#2](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)（ATtiny44/84/841用V-USB-MIDI実験用ボード）
 - [mi:muz:prot#3](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)（ATtiny45/85用V-USB-MIDI実験用ボード。I2Cマスタ用回路入り）
-- mi:muz:expr#1（ATtiny85用Hybrid-MIDI実験用ボード）[Comming Soon]
-- mi:muz:expr#2（ATtiny841用Hybrid-MIDI実験用ボード）[Comming Soon]
+- [mi:muz:expr#1](https://github.com/tadfmac/mi-muz/tree/master/boards/expr1)（ATtiny85用Hybrid-MIDI実験用ボード）
+- [mi:muz:expr#2](https://github.com/tadfmac/mi-muz/tree/master/boards/expr2)（ATtiny841用Hybrid-MIDI実験用ボード）
+- [mi:muz:sndr#1](https://github.com/tadfmac/mi-muz/tree/master/boards/sndr1)（mi:muz用オーディオアダプタ）
 
 ## Applications
 
