@@ -1,6 +1,6 @@
 # mi:muz:prot#3 ATtiny45/85 V-USB MIDI Test Board 
 
-ATtiny45/84用のV-USB MIDI Test Boardです。
+ATtiny45/85用のV-USB MIDI Test Boardです。
 V-USB-MIDIとI2Cとのブリッジ利用を想定し、USB D-をI2Cと競合しないPB3に接続しています。
 また、I2Cプルアップ用の回路も入れてあります。
 
