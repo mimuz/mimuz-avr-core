@@ -35,7 +35,7 @@
 #include <avr/wdt.h>
 
 // I2C
-#define I2C_SLAVE_ADDR  HMMAddr_1      // i2c slave address (0x31)
+#define I2C_SLAVE_ADDR  HMMAddr_3      // i2c slave address (0x31)
 
 // Volume PIN
 #if defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
