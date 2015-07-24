@@ -4,7 +4,7 @@ ATtiny85用のHybrid MIDI Test Boardです。
 専用のファームウエア[HybridMidiATtiny](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny)を利用することで、
 USBに刺せばUSB MIDIデバイス、mi:muz:mstrシールドと組み合わせれば、I2C MIDIデバイスとして利用することができます。
 
-![mi:muz:expr#1](mimuz-expr#1-image.png)
+![mi:muz:expr#1](mimuz-expr1-image.png)
 
 # Version
 
