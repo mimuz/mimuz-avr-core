@@ -42,12 +42,14 @@ Arduinoと複数のexprシリーズボードを組み合わせた実験が行い
 mi:muzを有効活用するためのArduino UNO用シールド。
 
 - [mi:muz:wrtr](https://github.com/tadfmac/mi-muz/tree/master/boards/wrtr)（8/14ピンATtiny向けの小さなISPシールド）
+- mi:muz:mstr-uno (comming soon)
 
 ### mi:muz ATtinyボード用アタッチメント
 
 mi:muz ATtinyボードの機能を拡張するためのアタッチメント。
 
 - [mi:muz:sndr#1](https://github.com/tadfmac/mi-muz/tree/master/boards/sndr1)（mi:muz用オーディオアダプタ）
+- mi:muz:ctlr (comming soon)
 
 ## Applications
 
