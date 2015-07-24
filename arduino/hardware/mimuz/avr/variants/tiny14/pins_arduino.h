@@ -152,22 +152,22 @@ TOCPMSA0 = (1<<TOCC3S1)|(1<<TOCC2S1);
 //                     PB0  2|    |13  PA0  
 //                     PB1  3|    |12  PA1  (TOCC0) <disabled>
 //                     PB3  4|    |11  PA2  (TOCC1) <disabled>
-//       OC0A (TOCC7)  PB2  5|    |10  PA3  (TOCC2) OC2B
-//       OC0B (TOCC6)  PA7  6|    |9   PA4  (TOCC3) OC2A
+//       OC2A (TOCC7)  PB2  5|    |10  PA3  (TOCC2) OC0B
+//       OC2B (TOCC6)  PA7  6|    |9   PA4  (TOCC3) OC0A
 //       OC1A (TOCC5)  PA6  7|    |8   PA5  (TOCC4) OC1B
 //                           +----+
 
-#define T841_TIMER_PINS_DEFAULT  (TOCPMSA1 = (1<<TOCC5S0)|(1<<TOCC4S0),TOCPMSA0 = (1<<TOCC3S1)|(1<<TOCC2S1))
-#define T841_TIMER_ENABLE_OC0A  (TOCPMCOE |= (1<<TOCC7OE))
-#define T841_TIMER_ENABLE_OC0B  (TOCPMCOE |= (1<<TOCC6OE))
+#define T841_TIMER_PINS_DEFAULT  (TOCPMSA1 = (1<<TOCC7S1)|(1<<TOCC6S1)|(1<<TOCC5S0)|(1<<TOCC4S0))
+#define T841_TIMER_ENABLE_OC2A  (TOCPMCOE |= (1<<TOCC7OE))
+#define T841_TIMER_ENABLE_OC2B  (TOCPMCOE |= (1<<TOCC6OE))
 #if !defined(ARDUINO_MIMUZ_EXPR2)
 #define T841_TIMER_ENABLE_OC1A  (TOCPMCOE |= (1<<TOCC5OE))
 #endif
 #define T841_TIMER_ENABLE_OC1B  (TOCPMCOE |= (1<<TOCC4OE))
 #if !defined(ARDUINO_MIMUZ_EXPR2)
-#define T841_TIMER_ENABLE_OC2A  (TOCPMCOE |= (1<<TOCC3OE))
+#define T841_TIMER_ENABLE_OC0A  (TOCPMCOE |= (1<<TOCC3OE))
 #endif
-#define T841_TIMER_ENABLE_OC2B  (TOCPMCOE |= (1<<TOCC2OE))
+#define T841_TIMER_ENABLE_OC0B  (TOCPMCOE |= (1<<TOCC2OE))
 
 #endif // __AVR_ATtiny441__ | __AVR_ATtiny841__
 
