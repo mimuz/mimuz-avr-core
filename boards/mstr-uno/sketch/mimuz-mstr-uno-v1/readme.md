@@ -30,7 +30,7 @@ Arduino UNOのATmega16u2に[mocoLUFA](https://github.com/kuwatay/mocolufa)を導
 
 ## 2. Arduino MIDI Libraryの導入
 
-[Arduino MIDI Library by @fortysevenfx](https://github.com/FortySevenEffects/arduino_midi_library/)をArduinoの`Libraries`フォルダにインストールします。
+[Arduino MIDI Library](https://github.com/FortySevenEffects/arduino_midi_library/)をArduinoの`Libraries`フォルダにインストールします。
 
 ## 3. Arduino UNO Rev.3へのスケッチの書き込み
 
