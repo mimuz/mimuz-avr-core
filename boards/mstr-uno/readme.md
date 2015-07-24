@@ -1,4 +1,4 @@
-# mi:muz:mstr:uno mi:muz:expr
+# mi:muz:mstr:uno
 
 Arduino UNO Rev.3にmi:muz:exprシリーズのボードを接続するためのシールドです。
 8台までのmi:muz:exprシリーズのボードを接続することができます。
