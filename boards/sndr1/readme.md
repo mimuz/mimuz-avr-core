@@ -8,6 +8,10 @@ mi:muzで手軽に音の実験を楽しむためのアダプターです。
 - mi:muz:expr#2 v0.1,v0.2,v0.21 # 2osc対応
 - mi:muz:prot#3 v1.0 # 1osc対応
 
+![mi:muz:sndr](mimuz-sndr-image.png)
+
+※写真の左側2つがmi:muz:sndr#1（ただしv0.1）です。
+
 # Version
 
 v0.3 (2015.06.25)
