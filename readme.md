@@ -61,5 +61,6 @@ mi:muz ATtinyボードの機能を拡張するためのアタッチメント。
 - シンセモドキ1号（mi:muz:prot#1にオーディオ出力回路を付けただけのシンプルなMIDI音源）
 - シンセモドキ2号（mi:muz:prot#3とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作）
 - シンセモドキ3号（mi:muz:prot#3とI2C接続するATtiny45×2に音源を内蔵したMIDI音源）
+- [can attacker (缶たたくやつ)](https://github.com/tadfmac/mi-muz/tree/master/applications/canattacker)
 
 
