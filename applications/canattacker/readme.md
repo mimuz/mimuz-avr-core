@@ -47,7 +47,7 @@ Arduino UNOでUSB-MIDIを扱うために、[Arduino MIDI Library](http://playgro
 
 ## Version
 
-v1.0 (2015.08.25)
+v1.0 (2015.08.30)
 
 ## Schematics
 
