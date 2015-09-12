@@ -385,8 +385,8 @@
 #define BBMA    0
 
 #define REMAP   _SFR_MEM8(0x65)
-#define U0MAP   1
-#define SPIMAP  0
+#define SPIMAP  1
+#define U0MAP   0
 
 #define TOCPMCOE _SFR_MEM8(0x66)
 #define TOCC0OE 0

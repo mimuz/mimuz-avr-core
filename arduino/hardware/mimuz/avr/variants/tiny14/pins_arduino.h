@@ -140,6 +140,13 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
 
 #if defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 
+// Use Alternative pins for SPI
+// REMAP |= (1<<SPIMAP); in variant.cpp
+static const uint8_t MISO = 0;
+static const uint8_t MOSI = 1;
+static const uint8_t SS   = 2;
+static const uint8_t SCK  = 3;
+
 /* 
 TOCPMCOE = (1<<TOCC7OE)|(1<<TOCC6OE)|(1<<TOCC5OE)|(1<<TOCC4OE)|(1<<TOCC3OE)|(1<<TOCC2OE);
 TOCPMSA1 = (1<<TOCC5S0)|(1<<TOCC4S0);

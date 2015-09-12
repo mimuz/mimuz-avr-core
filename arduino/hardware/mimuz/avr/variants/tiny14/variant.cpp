@@ -1,7 +1,3 @@
-// variant.cpp
-// Timer Pins definition for ATtiny841
-// CC 2015 by D.F.mac.
-
 #include <avr/pgmspace.h>
 #if 0 // for test
 #include "arduino.h"
@@ -27,5 +23,6 @@ void initVariant()
 
 T841_TIMER_PINS_DEFAULT;
 
+REMAP |= (1<<SPIMAP);
 }
 #endif
