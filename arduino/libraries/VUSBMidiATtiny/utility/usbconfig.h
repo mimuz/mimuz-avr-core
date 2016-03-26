@@ -48,6 +48,8 @@ section at the end of this file).
 #define USB_CFG_IOPORTNAME      B
 #elif defined (__AVR_ATtiny24__) || defined (__AVR_ATtiny44__) || defined (__AVR_ATtiny84__) || defined (__AVR_ATtiny441__) || defined (__AVR_ATtiny841__)
 #define USB_CFG_IOPORTNAME      A
+#elif defined (ARDUINO_MIMUZ_EXPR_MP1)
+#define USB_CFG_IOPORTNAME      C
 #endif
 
 #if defined (ARDUINO_MIMUZ_PROT1)
@@ -56,6 +58,8 @@ section at the end of this file).
 #define USB_CFG_DMINUS_BIT      3
 #elif defined (ARDUINO_MIMUZ_EXPR2)
 #define USB_CFG_DMINUS_BIT		6
+#elif defined (ARDUINO_MIMUZ_EXPR_MP1)
+#define USB_CFG_DMINUS_BIT		4
 #else // ARDUINO_MIMUZ_PROT2, ARDUINO_MIMUZ_EXPR1
 #define USB_CFG_DMINUS_BIT      0
 #endif
@@ -64,6 +68,8 @@ section at the end of this file).
 #define USB_CFG_DPLUS_BIT       4
 #elif defined (ARDUINO_MIMUZ_EXPR1)
 #define USB_CFG_DPLUS_BIT       2
+#elif defined (ARDUINO_MIMUZ_EXPR_MP1)
+#define USB_CFG_DPLUS_BIT       5
 #else // ARDUINO_MIMUZ_PROT1,ARDUINO_MIMUZ_PROT2,ARDUINO_MIMUZ_PROT3
 #define USB_CFG_DPLUS_BIT       1
 #endif
@@ -424,6 +430,19 @@ extern void hadUsbReset(void);
 #define USB_INTR_PENDING_BIT    PCIF0
 #define USB_INTR_VECTOR         SIG_PIN_CHANGE0
 
+#elif defined (ARDUINO_MIMUZ_EXPR_MP1)
+ 
+#define USB_INTR_CFG            PCMSK1
+
+#define USB_INTR_CFG_SET        (1 << PCINT13)
+#define USB_INTR_CFG_CLR        0
+#define USB_INTR_ENABLE         PCICR
+#define USB_INTR_ENABLE_BIT     PCIE1
+#define USB_INTR_PENDING        PCIFR
+#define USB_INTR_PENDING_BIT    PCIF1
+#define USB_INTR_VECTOR         PCINT1_vect
+
 #endif
+
 
 #endif /* __usbconfig_h_included__ */

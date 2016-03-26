@@ -163,14 +163,14 @@ mimuz-expr2-44.bootloader.tool=arduino:avrdude
 mimuz-expr2-44.bootloader.low_fuses=0xfe
 mimuz-expr2-44.bootloader.high_fuses=0xdf
 mimuz-expr2-44.bootloader.extended_fuses=0xff
-mimuz-expr2-44.upload.maximum_size=4096
 mimuz-expr2-44.build.mcu=attiny44
 mimuz-expr2-44.build.f_cpu=16000000L
 mimuz-expr2-44.build.core=arduino:arduino
 mimuz-expr2-44.build.variant=tiny14
-mimuz-expr2-44.upload.maximum_data_size=256
 mimuz-expr2-44.build.board=MIMUZ_EXPR2
 mimuz-expr2-44.upload.tool=arduino:avrdude
+mimuz-expr2-44.upload.maximum_size=4096
+mimuz-expr2-44.upload.maximum_data_size=256
 
 # ----------------------------------------------------------
 # mi:muz:expr#2 (ATtiny841 16.0Mhz)
@@ -182,14 +182,50 @@ mimuz-expr2-841.bootloader.lock_bits=0xff
 mimuz-expr2-841.bootloader.low_fuses=0xee
 mimuz-expr2-841.bootloader.high_fuses=0xdf
 mimuz-expr2-841.bootloader.extended_fuses=0xff
-mimuz-expr2-841.upload.maximum_size=8192
 mimuz-expr2-841.build.mcu=attiny841
 mimuz-expr2-841.build.f_cpu=16000000L
 mimuz-expr2-841.build.core=arduino:arduino
 mimuz-expr2-841.build.variant=tiny14
-mimuz-expr2-841.upload.maximum_data_size=512
 mimuz-expr2-841.build.board=MIMUZ_EXPR2
 mimuz-expr2-841.upload.tool=arduino:avrdude
+mimuz-expr2-841.upload.maximum_size=8192
+mimuz-expr2-841.upload.maximum_data_size=512
+
+# ----------------------------------------------------------
+# mi:muz:expr-mega#P1 (ATmega328P-PU 16.0Mhz)
+#
+#                       +------+
+#             RESET PC6 |1   28| PC5/A5 (USB D+)
+#                   PD0 |2   27| PC4/A4 (USB D-)    
+#                   PD1 |3   26| PC3/A3
+#          (BUTTON) PD2 |4   25| PC2/A2
+#                   PD3 |5   24| PC1/A1
+#                   PD4 |6   23| PC0/A0 (CdS)
+#                   VCC |7   22| GND
+#                   GND |8   21| AREF
+#                   PB6 |9   20| AVCC
+#                   PB7 |10  19| PB5 (LED)
+#                   PD5 |11  18| PB4
+#                   PD6 |12  17| PB3
+#                   PD7 |13  16| PB2
+#                   PB0 |14  15| PB1
+#                       +------+
+
+mimuz-expr2-841.name=expr-mega1(m328/16.0M/D+PC5,D-PC4)
+mimuz-expr2-841.bootloader.tool=arduino:avrdude
+mimuz-expr2-841.bootloader.unlock_bits=0x3F
+mimuz-expr2-841.bootloader.lock_bits=0x0F
+mimuz-expr2-841.bootloader.low_fuses=0xFF
+mimuz-expr2-841.bootloader.high_fuses=0xDE
+mimuz-expr2-841.bootloader.extended_fuses=0x05
+mimuz-expr2-841.build.mcu=atmega328p
+mimuz-expr2-841.build.f_cpu=16000000L
+mimuz-expr2-841.build.core=arduino:arduino
+mimuz-expr2-841.build.variant=arduino:standard
+mimuz-expr2-841.build.board=MIMUZ_EXPR_MP1
+mimuz-expr2-841.upload.tool=arduino:avrdude
+mimuz-expr2-841.upload.maximum_size=32768
+mimuz-expr2-841.upload.maximum_data_size=2048
 
 
 

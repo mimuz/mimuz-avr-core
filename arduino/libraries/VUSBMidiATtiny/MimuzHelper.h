@@ -1,6 +1,7 @@
 // MimuzHelper.h
 //
 // 2015.05.21 : add by D.F.Mac.
+// 2016.03.26 : added partial support to ARDUINO_MIMUZ_EXPR_MP1 board (ATmega328P).
 
 #ifndef __MimuzHelper_h__
 #define __MimuzHelper_h__
@@ -20,6 +21,10 @@
 #define LED_PORT PORTB
 #elif defined (ARDUINO_MIMUZ_EXPR1)
 #define LED_MASK (1 << 3)
+#define LED_DDR  DDRB
+#define LED_PORT PORTB
+#elif defined (ARDUINO_MIMUZ_EXPR_MP1)
+#define LED_MASK (1 << 5)
 #define LED_DDR  DDRB
 #define LED_PORT PORTB
 #else

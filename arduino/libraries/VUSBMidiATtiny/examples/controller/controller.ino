@@ -32,6 +32,25 @@
 # (LED)  OC1B/A2/D4/PB4 |3    6| PB1/D1/OC0B/OC1A  (USB D+)
 #                   GND |4    5| PB0/D0/OC0A
 #                       +------+
+# mi:muz:expr-mega#P1
+#
+#                       +------+
+#             RESET PC6 |1   28| PC5/A5 (USB D+)
+#                   PD0 |2   27| PC4/A4 (USB D-)    
+#                   PD1 |3   26| PC3/A3
+#          (BUTTON) PD2 |4   25| PC2/A2
+#                   PD3 |5   24| PC1/A1
+#                   PD4 |6   23| PC0/A0 (CdS)
+#                   VCC |7   22| GND
+#                   GND |8   21| AREF
+#                   PB6 |9   20| AVCC
+#                   PB7 |10  19| PB5 (LED)
+#                   PD5 |11  18| PB4
+#                   PD6 |12  17| PB3
+#                   PD7 |13  16| PB2
+#                   PB0 |14  15| PB1
+#                       +------+
+
 */
 
 
