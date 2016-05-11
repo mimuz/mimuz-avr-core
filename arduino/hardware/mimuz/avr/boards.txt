@@ -211,21 +211,20 @@ mimuz-expr2-841.upload.maximum_data_size=512
 #                   PB0 |14  15| PB1
 #                       +------+
 
-mimuz-expr2-841.name=expr-mega1(m328/16.0M/D+PC5,D-PC4)
-mimuz-expr2-841.bootloader.tool=arduino:avrdude
-mimuz-expr2-841.bootloader.unlock_bits=0x3F
-mimuz-expr2-841.bootloader.lock_bits=0x0F
-mimuz-expr2-841.bootloader.low_fuses=0xFF
-mimuz-expr2-841.bootloader.high_fuses=0xDE
-mimuz-expr2-841.bootloader.extended_fuses=0x05
-mimuz-expr2-841.build.mcu=atmega328p
-mimuz-expr2-841.build.f_cpu=16000000L
-mimuz-expr2-841.build.core=arduino:arduino
-mimuz-expr2-841.build.variant=arduino:standard
-mimuz-expr2-841.build.board=MIMUZ_EXPR_MP1
-mimuz-expr2-841.upload.tool=arduino:avrdude
-mimuz-expr2-841.upload.maximum_size=32768
-mimuz-expr2-841.upload.maximum_data_size=2048
-
+mimuz-expr-mega-p1.name=expr-mega1(m328/16.0M/D+PC5,D-PC4)
+mimuz-expr-mega-p1.bootloader.tool=arduino:avrdude
+mimuz-expr-mega-p1.bootloader.unlock_bits=0x3F
+mimuz-expr-mega-p1.bootloader.lock_bits=0x0F
+mimuz-expr-mega-p1.bootloader.low_fuses=0xFF
+mimuz-expr-mega-p1.bootloader.high_fuses=0xDE
+mimuz-expr-mega-p1.bootloader.extended_fuses=0x05
+mimuz-expr-mega-p1.build.mcu=atmega328p
+mimuz-expr-mega-p1.build.f_cpu=16000000L
+mimuz-expr-mega-p1.build.core=arduino:arduino
+mimuz-expr-mega-p1.build.variant=arduino:standard
+mimuz-expr-mega-p1.build.board=MIMUZ_EXPR_MP1
+mimuz-expr-mega-p1.upload.tool=arduino:avrdude
+mimuz-expr-mega-p1.upload.maximum_size=32768
+mimuz-expr-mega-p1.upload.maximum_data_size=2048
 
 
