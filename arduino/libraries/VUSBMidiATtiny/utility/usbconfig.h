@@ -60,13 +60,15 @@ section at the end of this file).
 #define USB_CFG_DMINUS_BIT		6
 #elif defined (ARDUINO_MIMUZ_EXPR_MP1)
 #define USB_CFG_DMINUS_BIT		4
+#elif defined (ARDUINO_BRUSH_KNOB_V1)
+#define USB_CFG_DMINUS_BIT		1
 #else // ARDUINO_MIMUZ_PROT2, ARDUINO_MIMUZ_EXPR1
 #define USB_CFG_DMINUS_BIT      0
 #endif
 
 #if defined (ARDUINO_MIMUZ_EXPR2)
 #define USB_CFG_DPLUS_BIT       4
-#elif defined (ARDUINO_MIMUZ_EXPR1)
+#elif defined (ARDUINO_MIMUZ_EXPR1) || defined (ARDUINO_BRUSH_KNOB_V1)
 #define USB_CFG_DPLUS_BIT       2
 #elif defined (ARDUINO_MIMUZ_EXPR_MP1)
 #define USB_CFG_DPLUS_BIT       5
