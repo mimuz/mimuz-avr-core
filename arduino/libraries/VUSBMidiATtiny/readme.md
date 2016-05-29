@@ -74,23 +74,43 @@ attiny44-16.build.variant=tiny14
 
 ## リファレンスボード (mi:muz)
 
-下記3種類のボード設定に対応しています。
+下記ボード設定に対応しています。
 適宜 usbconfig.hの設定を変更することで、自由にピンアサインを変更可能です。
 
-### [mi:muz:prot#1 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)
+### [mi:muz:prot#1 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)
 
 - D+ PB1
 - D- PB2
 
-### [mi:muz:prot#2 (ATTiny44/84/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)
+### [mi:muz:prot#2 (ATtiny44/84/441/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)
 
 - D+ PA1
 - D- PA0
 
-### [mi:muz:prot#3 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)
+### [mi:muz:prot#3 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)
 
 - D+ PB1
 - D- PB3
+
+### [mi:muz:expr#1 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr1)
+
+- D+ PB2
+- D- PB0
+
+### [mi:muz:expr#2 (ATtiny44/84/441/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr2)
+
+- D+ PA4
+- D- PA6
+
+### [mi:muz:expr-megaP1 (ATmega328P)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr-megaP1)
+
+- D+ PC5
+- D- PC4
+
+### [@kmwtrさん作: BrushKnob](https://github.com/kmwtr/BrushKnob)
+
+- D+ PB2
+- D- PB1
 
 ## examples
 
@@ -118,6 +138,15 @@ Note ONを受け取ったらLEDを光らせるだけのデモです。
 [mi:muz:prot#1 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)をベースとしてD4（3番PIN）へオーディオ出力を追加してください。
 
 ROM容量はパツパツですが、一応ATTiny45にも収まるように作っています。
+
+### BrushKnob v1
+
+BrushKnobは本来HIDキーボードデバイスですが、MIDIデバイス化するサンプルです。
+※HIDキーボードとしては認識されなくなります！ご注意ください。
+
+`examples/BrushKnob1/BrushKnob1.ino`
+
+ロータリーエンコーダーでNote Numberを切り替えてボタンを押すとNote Onを出力します。
 
 ## ベースソフトウエアとライセンス
 
