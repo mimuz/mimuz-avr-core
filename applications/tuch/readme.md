@@ -38,7 +38,7 @@ mi:muz:tuch専用のConfiguratorです。
 
 # Known issues
 
-- []()
+- #4
 
 # Licenses
 
