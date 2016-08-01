@@ -62,5 +62,4 @@ mi:muz ATtinyボードの機能を拡張するためのアタッチメント。
 - シンセモドキ2号（mi:muz:prot#3とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作）
 - シンセモドキ3号（mi:muz:prot#3とI2C接続するATtiny45×2に音源を内蔵したMIDI音源）
 - [can attacker (缶たたくやつ)](https://github.com/tadfmac/mi-muz/tree/master/applications/canattacker)
-
-
+- [mi:muz:tuch Hybrid MIDI touch sensor board](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch)
