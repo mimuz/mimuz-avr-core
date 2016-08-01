@@ -18,9 +18,17 @@ PCのUSB端子あるいは、mi:muz:mstrのI2C端子に接続できます。
 
 v0.11 (2016.07.31)
 
-# Schematics
+# Schematic
 
-Comming Soon!!
+![Schematic](tuch-schematic.png)
+
+# Top View
+
+![TopView](tuch-top.png)
+
+# Bottom View
+
+![BottomView](tuch-bottom.png)
 
 ## parts
 
