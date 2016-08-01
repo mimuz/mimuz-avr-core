@@ -38,7 +38,7 @@ mi:muz:tuch専用のConfiguratorです。
 
 # Known issues
 
-- #4
+- [#4 bug: mi:muz:tuch ch#5 を触るとUSB通信が停止する問題](https://github.com/tadfmac/mi-muz/issues/4)
 
 # Licenses
 
