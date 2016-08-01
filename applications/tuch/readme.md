@@ -26,15 +26,15 @@ Comming Soon!!
 
 # sketches
 
-- [Touch Sensor (for ATmega8A)](https://github.com/tadfmac/mi-muz/tree/master/boards/tuch/sketch/mega8_touchSensor/)
-- [Touch Sensor to Hybrid MIDI bridge (for ATtiny44A)](https://github.com/tadfmac/mi-muz/tree/master/boards/tuch/sketch/mega8_touchSensor/)
+- [Touch Sensor (for ATmega8A)](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch/sketch/mega8_touchSensor/)
+- [Touch Sensor to Hybrid MIDI bridge (for ATtiny44A)](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch/sketch/mega8_touchSensor/)
 
 # Configurator
 
 mi:muz:tuch専用のConfiguratorです。
 
 - [Sample](http://mz4u.net/tuch/)
-- [Source](https://github.com/tadfmac/mi-muz/tree/master/boards/tuch/configurator/)
+- [Source](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch/configurator/)
 
 # Known issues
 
