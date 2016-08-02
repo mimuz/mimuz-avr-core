@@ -32,7 +32,23 @@ v0.11 (2016.07.31)
 
 ## parts
 
-Comming Soon!!
+- [ATtiny44A-SSU](http://www.atmel.com/ja/jp/devices/ATTINY44A.aspx) * 1
+- [ATmega8A-AU](http://www.atmel.com/ja/jp/devices/ATMEGA8A.aspx) * 1
+- ツェナーダイオード(SOD323) 3.6V * 2
+- クリスタル 16Mhz (5032 2Pad) * 1
+- [フェライトビーズ](http://akizukidenshi.com/catalog/g/gP-04442/) * 2 [ID1,ID2]
+- 100Ω(0603) * 2 (For USB D+, D- Line)
+- 470Ω(0603) * 1 (For ATtiny44 LED)
+- 1kΩ(0603) * 6 (For ATmega8A touch line LED)
+- 4.7kΩ(0603) * 1 (D+ Line Pull up)
+- 10kΩ(0603) * 1 (Tactical switch pull down)
+- 1MΩ(2012) * 6 (For Touch Sensor)
+- 3mLED 色はお好みで * 7
+- 22pF(0603) * 2
+- 0.1uF(0603) * 5
+- 22uF(0805) * 1
+- [タクトスイッチ](http://akizukidenshi.com/catalog/g/gP-03651/) 色はお好みで * 1
+- 2.54mm ピンヘッダ 2×3 * 2 (v0.1基盤はATmega8A側は要ジャンパー) ※プログラム書き換えなければ不要
 
 # sketches
 
