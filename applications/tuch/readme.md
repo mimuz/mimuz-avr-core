@@ -1,4 +1,4 @@
-![mi:muz:tuch (v0.1)](tuch-image.png)
+![mi:muz:tuch (v0.1)](tuch-image.jpg)
 
 # mi:muz:tuch Hybrid MIDI touch sensor board
 
