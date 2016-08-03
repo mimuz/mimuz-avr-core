@@ -1,3 +1,5 @@
+![mi:muz:tuch (v0.1)](tuch-image.png)
+
 # mi:muz:tuch Hybrid MIDI touch sensor board
 
 ![mi:muz:tuch](device.png)
