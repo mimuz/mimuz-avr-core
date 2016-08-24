@@ -35,6 +35,10 @@ v0.11 (2016.07.31)
 
 ![BottomView](tuch-bottom.png)
 
+# Eagle Files
+
+[eagle files](./eagle-files/)
+
 ## parts
 
 - [ATtiny44A-SSU](http://www.atmel.com/ja/jp/devices/ATTINY44A.aspx) * 1
