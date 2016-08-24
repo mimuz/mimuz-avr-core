@@ -37,7 +37,7 @@ v0.11 (2016.07.31)
 
 # Eagle Files
 
-[eagle files](./eagle-files/)
+[eagle files (v0.11)](./eagle-files/)
 
 ## parts
 
