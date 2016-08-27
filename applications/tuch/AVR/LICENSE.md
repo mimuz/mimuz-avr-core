@@ -109,7 +109,7 @@
 
 ---
 
-# Sketches, Libraries
+# Sketches, Libraries (AVR)
 
 ### GPLv2
           

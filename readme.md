@@ -79,4 +79,5 @@ STM32を利用してMIDIデバイスを作成するためのプロジェクト�
 - シンセモドキ2号（mi:muz:prot#3とI2C接続するATtiny45に音源を内蔵したMIDI音源。1号より安定動作）
 - シンセモドキ3号（mi:muz:prot#3とI2C接続するATtiny45×2に音源を内蔵したMIDI音源）
 - [can attacker (缶たたくやつ)](./applications/canattacker)
-- [mi:muz:tuch Hybrid MIDI touch sensor board](./applications/tuch)
+- [mi:muz:tuch](./applications/tuch) MIDI Controller with flexible touch keys.
+
