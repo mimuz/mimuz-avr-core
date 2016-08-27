@@ -29,6 +29,12 @@ see also [STM32 Version](./STM32)
 - [Sample](http://mz4u.net/tuch/)
 - [Source](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch/configurator/)
 
+# VID/PID
+
+USB VID/PID pair for this application is provided by [pid.codes](http://pid.codes/).
+
+> This Project is opensource. but if You folk this project to another product, USB VID/PID pair must be replaced to another codes. 
+
 # Licenses
 
 mi:muz:tuch under indivisual licences for AVR Version, STM32 Version and Configurator.
