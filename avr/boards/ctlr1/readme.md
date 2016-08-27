@@ -39,8 +39,8 @@ v0.1とv0.2β以降で4051のピンと接続するスイッチ/ボリューム�
 
 ボードに合わせたスケッチを選んでください。
 
-- [8個ボリュームコントローラー (v0.1用)](https://github.com/tadfmac/mi-muz/tree/master/boards/ctlr1/example/con8a0d_h/con8a0d_h.ino)
-- [4個ボリューム+4個スイッチコントローラー (v0.1用)](https://github.com/tadfmac/mi-muz/tree/master/boards/ctlr1/example/con4a4d_470o_h/con4a4d_470o_h.ino)
+- [8個ボリュームコントローラー (v0.1用)](./example/con8a0d_h/con8a0d_h.ino)
+- [4個ボリューム+4個スイッチコントローラー (v0.1用)](./example/con4a4d_470o_h/con4a4d_470o_h.ino)
 
 # Licenses
 

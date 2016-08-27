@@ -1,6 +1,6 @@
 # mi:muz:tuch (MIDI Controller with flexible touch keys) AVR Version
 
-![mi:muz:tuch](device.png)
+![mi:muz:tuch](../device.png)
 
 mi:muz:tuch is a USB MIDI controller with capacitive touch sensor.
 It has now two indivisual versions, AVR or STM32.

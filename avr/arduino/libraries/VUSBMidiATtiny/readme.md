@@ -77,32 +77,32 @@ attiny44-16.build.variant=tiny14
 下記ボード設定に対応しています。
 適宜 usbconfig.hの設定を変更することで、自由にピンアサインを変更可能です。
 
-### [mi:muz:prot#1 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)
+### [mi:muz:prot#1 (ATtiny45/85)](../../boards/prot1)
 
 - D+ PB1
 - D- PB2
 
-### [mi:muz:prot#2 (ATtiny44/84/441/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot2)
+### [mi:muz:prot#2 (ATtiny44/84/441/841)](../../boards/prot2)
 
 - D+ PA1
 - D- PA0
 
-### [mi:muz:prot#3 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot3)
+### [mi:muz:prot#3 (ATtiny45/85)](../../boards/prot3)
 
 - D+ PB1
 - D- PB3
 
-### [mi:muz:expr#1 (ATtiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr1)
+### [mi:muz:expr#1 (ATtiny45/85)](../../boards/expr1)
 
 - D+ PB2
 - D- PB0
 
-### [mi:muz:expr#2 (ATtiny44/84/441/841)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr2)
+### [mi:muz:expr#2 (ATtiny44/84/441/841)](../../boards/expr2)
 
 - D+ PA4
 - D- PA6
 
-### [mi:muz:expr-megaP1 (ATmega328P)](https://github.com/tadfmac/mi-muz/tree/master/boards/expr-megaP1)
+### [mi:muz:expr-megaP1 (ATmega328P)](../../boards/expr-megaP1)
 
 - D+ PC5
 - D- PC4
@@ -116,26 +116,26 @@ attiny44-16.build.variant=tiny14
 
 ### blink (For ATTiny45/85/44/84/841)
 
-`/examples/blink/blink.ino`
+`./examples/blink/blink.ino`
 
 Note ONを受け取ったらLEDを光らせるだけのデモです。
 導通テストなどにご利用ください。
 
 ### controller (For ATTiny45/85/44/84/841)
 
-`/examples/controller/controller.ino`
+`./examples/controller/controller.ino`
 
 アナログ入力１つのコントローラーのデモです。
 アナログ入力に可変抵抗を繋いで回せば、コントトールチェンジを送信します。
 
 ### シンセモドキ (For mi:muz:prot1 ATTiny45/85)
 
-`/examples/sounder/sounder.ino`
+`./examples/sounder/sounder.ino`
 
 これは、MIDIキーボードでポルタメントっぽい演奏ができるシンセモドキです。
 オシレータのSine Waveの部分は、[Arduino DDS Sinewave Generator](http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/)を参考にしましたが、他の機能を入れたり、ATTiny45に併せてROM削減したので、もとよりかなり荒くなっています。
 
-[mi:muz:prot#1 (ATTiny45/85)](https://github.com/tadfmac/mi-muz/tree/master/boards/prot1)をベースとしてD4（3番PIN）へオーディオ出力を追加してください。
+[mi:muz:prot#1 (ATTiny45/85)](../../boards/prot1)をベースとしてD4（3番PIN）へオーディオ出力を追加してください。
 
 ROM容量はパツパツですが、一応ATTiny45にも収まるように作っています。
 
@@ -144,7 +144,7 @@ ROM容量はパツパツですが、一応ATTiny45にも収まるように作っ
 BrushKnobは本来HIDキーボードデバイスですが、MIDIデバイス化するサンプルです。
 ※HIDキーボードとしては認識されなくなります！ご注意ください。
 
-`examples/BrushKnob1/BrushKnob1.ino`
+`./examples/BrushKnob1/BrushKnob1.ino`
 
 ロータリーエンコーダーでNote Numberを切り替えてボタンを押すとNote Onを出力します。
 

@@ -36,8 +36,8 @@ v0.01 (2016.03.26)
 
 # example
 
-- [blink:MIDI-INを受けてLEDチカするスケッチ](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/blink)
-- [controller:ボリュームを回すとMIDIコントロール送信](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/controller)
+- [blink:MIDI-INを受けてLEDチカするスケッチ](../../arduino/libraries/VUSBMidiATtiny/examples/blink)
+- [controller:ボリュームを回すとMIDIコントロール送信](../../arduino/libraries/VUSBMidiATtiny/examples/controller)
 
 # Licenses
 

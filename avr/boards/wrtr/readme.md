@@ -29,7 +29,7 @@ v1.0 (2015.04.28)
 
 # example
 
-- [blinkTest:書き込みテスト用スケッチ](https://github.com/tadfmac/mi-muz/tree/master/boards/wrtr/example/blinkTest/)
+- [blinkTest:書き込みテスト用スケッチ](./example/blinkTest/)
 
 # Licenses
 

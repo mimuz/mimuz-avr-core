@@ -37,8 +37,8 @@ v0.3 (2015.06.25)
 
 # example
 
-- [sounder:シンセモドキ1号](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/sounder)
-- [sounder_h:シンセモドキ1号(Hybrid MIDI Version)](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny/examples/sounder_h)
+- [sounder:シンセモドキ1号](../../arduino/libraries/VUSBMidiATtiny/examples/sounder)
+- [sounder_h:シンセモドキ1号(Hybrid MIDI Version)](../../arduino/libraries/HybridMidiAttiny/examples/sounder_h)
 
 # Licenses
 

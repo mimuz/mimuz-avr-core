@@ -1,6 +1,6 @@
 # HybridMidiAttiny
 
-HybridMidiAttiny is a Arduino MIDI library for mi:muz:expr, it was forked from [VUSBMidiATtiny](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny).
+HybridMidiAttiny is a Arduino MIDI library for mi:muz:expr, it was forked from [VUSBMidiATtiny](../VUSBMidiATtiny).
 
 HybridMidiAttiny provides hybrid mode interface, V-USB or I2C slave (auto selectable) to the following boards.
 
@@ -10,13 +10,13 @@ HybridMidiAttiny provides hybrid mode interface, V-USB or I2C slave (auto select
 I2C SlaveとV-USBの2モードに対応したArduino用のMIDIライブラリです。
 I2CとUSBのピンを共用する設計になっているmi:muz:exprシリーズのボードでのみ使うことができます。
 
-I2C Slave機能が追加されていることを除き、使い方や機能は[VUSBMidiATtiny](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny)に準じます。
+I2C Slave機能が追加されていることを除き、使い方や機能は[VUSBMidiATtiny](../VUSBMidiATtiny)に準じます。
 
 ## Usage
 
 [T.B.D.]
 
-See also [VUSBMidiATtiny](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny).
+See also [VUSBMidiATtiny](../VUSBMidiATtiny).
 
 ## License
 
@@ -38,8 +38,7 @@ HybridMidiATtiny is based on the following projects.
   http://playground.arduino.cc/Code/USIi2c
   https://github.com/rambo/TinyWire
 
-[5] arduino-vusb-midi-attiny
-  https://github.com/tadfmac/arduino-vusb-midi-attiny
+[5] [VUSBMidiAttiny](../VUSBMidiATtiny)
 
 
 

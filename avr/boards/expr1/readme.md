@@ -32,10 +32,10 @@ v0.11 (2015.07.05)
 
 # example
 
-- [blink_h:MIDI-INを受けてLEDチカするスケッチ(Hybrid MIDI Version)](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny/examples/blink_h)
-- [button_h:スイッチを押すとMIDI送信(Hybrid MIDI Version)](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny/examples/button_h)
-- [controller_h:ボリュームを回すとMIDIコントロール送信(Hybrid MIDI Version)](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny/examples/controller_h)
-- [sounder_h:シンセモドキ1号(Hybrid MIDI Version)](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/HybridMidiAttiny/examples/sounder_h)
+- [blink_h:MIDI-INを受けてLEDチカするスケッチ(Hybrid MIDI Version)](../../arduino/libraries/HybridMidiAttiny/examples/blink_h)
+- [button_h:スイッチを押すとMIDI送信(Hybrid MIDI Version)](../../arduino/libraries/HybridMidiAttiny/examples/button_h)
+- [controller_h:ボリュームを回すとMIDIコントロール送信(Hybrid MIDI Version)](../../arduino/libraries/HybridMidiAttiny/examples/controller_h)
+- [sounder_h:シンセモドキ1号(Hybrid MIDI Version)](../../arduino/libraries/HybridMidiAttiny/examples/sounder_h)
 
 # Licenses
 

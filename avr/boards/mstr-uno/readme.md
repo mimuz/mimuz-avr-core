@@ -28,7 +28,7 @@ v0.1 (2015.07.24)
 
 # scketch
 
-- [mimuz-mstr-uno-v1](https://github.com/tadfmac/mi-muz/tree/master/boards/mstr-uno/sketch/mimuz-mstr-uno-v1/)
+- [mimuz-mstr-uno-v1](./sketch/mimuz-mstr-uno-v1/)
 
 # Licenses
 

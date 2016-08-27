@@ -30,9 +30,9 @@ v1.0 (2015.05.23)
 
 # example
 
-- [blink:MIDI-INを受けてLEDチカするスケッチ](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/blink)
-- [sounder:シンセモドキ1号](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/sounder)
-- [「ち〜ん」](https://github.com/tadfmac/mi-muz/tree/master/arduino/libraries/VUSBMidiATtiny/examples/ATTiny45_CheenSounder02)
+- [blink:MIDI-INを受けてLEDチカするスケッチ](../../arduino/libraries/VUSBMidiATtiny/examples/blink)
+- [sounder:シンセモドキ1号](../../arduino/libraries/VUSBMidiATtiny/examples/sounder)
+- [「ち〜ん」](../../arduino/libraries/VUSBMidiATtiny/examples/ATTiny45_CheenSounder02)
 
 # Licenses
 
