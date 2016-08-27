@@ -62,10 +62,12 @@ mi:muz ATtinyボードを使って簡単にデバイスの実験を行うため�
 - [mi:muz:sndr#1](./boards/sndr1)（mi:muz:expr#1,#2用オーディオアダプタ）
 - [mi:muz:ctlr#1](./boards/ctlr1)（mi:muz:expr#2用 8chコントローラーアダプタ）
 
+------
 # STM32
 
 STM32を利用してMIDIデバイスを作成するためのプロジェクトファイルを公開する予定です。(Comming Soon)
 
+------
 # Applications
 
 `mi:muz`プロジェクトで生まれたデバイスを紹介しています。
