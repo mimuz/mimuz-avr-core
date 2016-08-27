@@ -8,15 +8,6 @@ It has now two indivisual versions, AVR or STM32.
 And also, Web preset configurator is available to [Configurator](http://mz4u.net/tuch/).
 MIDI note numbers be able to change to You want.  
 
-# Common Usage
-
-- USB Mode: mi:muz:tuch connect to PC via USB, work in USB mode.
-- I2C Mode (v0.1x only): mi:muz:tuch connect to mi:muz:mstr, work in I2C mode.
-- Connect to Objects: Any electricity objects to connect to the mi:muz:tuch's touch terminal via alligator clips.
-- Calibration: Please push center switch.
-- Touch! : When you touch to the any object, MIDI Note ON/OFF event corresponding to the touch channel will be sent to the PC.
-- Let's Enjoy :D
-
 # STM32 Version (STM32F042K6T6)
 
 STM32 version of mi:muz:tuch (v0.2x) is my first STM32 project, it now only support USB Mode.
