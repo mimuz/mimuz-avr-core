@@ -10,9 +10,8 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#define LEDTIMEMAX 5
-
-#define WAIT_TIME_MS 4
+#define LEDTIMEMAX 7
+#define WAIT_TIME_MS 2
 
 void SystemClock_Config(void);
 void Error_Handler(int num);
@@ -23,17 +22,24 @@ static void onNoteOff(uint8_t ch, uint8_t note, uint8_t vel);
 static void onCtlChange(uint8_t ch, uint8_t num, uint8_t value);
 
 #define TOUCH_CHANNELS 6
-#define SENSOR_MARGIN_BASE   16
-#define SENSOR_MARGIN_DIV   512
+#define SENSOR_MARGIN_BASE   13
+#define SENSOR_MARGIN_DIV   384
+#define SENSOR_MARGIN_LIMIT   7
+#define SENSOR_DOWN_VALUE     2
+#define SENSOR_UP_VALUE       4
+#define SENSOR_CHECK_NUM      7
+#define SENSOR_CALIB_TIMES  512
+
+
 
 typedef struct _TTouchGPIO{
-	GPIO_TypeDef *pOutGPIOPort;
-	GPIO_TypeDef *pLEDGPIOPort;
-	GPIO_TypeDef *pInGPIOPort;
-	uint16_t OutPin;
-	uint16_t LedPin;
-	uint16_t InPin;
-	uint16_t dummy;
+  GPIO_TypeDef *pOutGPIOPort;
+  GPIO_TypeDef *pLEDGPIOPort;
+  GPIO_TypeDef *pInGPIOPort;
+  uint16_t OutPin;
+  uint16_t LedPin;
+  uint16_t InPin;
+  uint16_t dummy;
 } TTouchGPIO;
 
 void sensorLEDOn(int ch);

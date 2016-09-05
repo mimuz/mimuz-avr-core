@@ -41,8 +41,8 @@ uint32_t *b4arrq_pop(stB4Arrq *qp){
   uint32_t top = qp->top;
   if(top != qp->last){
     pRes = p+top;
-	qp->top = b4arrq_next(top);
-	qp->num --;
+    qp->top = b4arrq_next(top);
+    qp->num --;
   }
   return pRes;
 }

@@ -64,8 +64,8 @@ int old_pin = GPIO_PIN_RESET;
 
 // EEPROM
 uint16_t VirtAddVarTab[NB_OF_VAR] = {
-		0x1000, 0x1001, 0x1002, 0x1003,
-		0x1004, 0x1005, 0x1006, 0x1007
+  0x1000, 0x1001, 0x1002, 0x1003,
+  0x1004, 0x1005, 0x1006, 0x1007
 };
 
 uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -75,6 +75,9 @@ uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0, 0, 0, 0, 0, 0};
 ///////////////
 int val[] = {0,0,0,0,0,0};
 int comp[] = {-1,-1,-1,-1,-1,-1};
+int compH[] = {-1,-1,-1,-1,-1,-1};
+int compL[] = {0x7fff,0x7fff,0x7fff,0x7fff,0x7fff,0x7fff};
+
 uint8_t notes[] = {24,20,21,22,23,25};
 uint8_t onoff[] = {0,0,0,0,0,0};
 uint8_t seq[] = {0,0,0,0,0,0};
@@ -91,7 +94,7 @@ static void onCtlChange(uint8_t ch, uint8_t num, uint8_t value){
       mode = value;
     }else if(func < 6){  // Preset-number 110-115
       if(mode == 1){
-    	EE_WriteVariable(VirtAddVarTab[func],value);
+        EE_WriteVariable(VirtAddVarTab[func],value);
         notes[func] = value;
       }else{  // mode == 2
         sendCtlChange(15,119,1);
@@ -111,9 +114,9 @@ void loadNums(){
   chk = EE_ReadVariable(VirtAddVarTab[7],&VarDataTab[7]);
   if(chk == 0){
     for(cnt = 0;cnt < cntmax;cnt ++){
-   	  EE_ReadVariable(VirtAddVarTab[cnt],&VarDataTab[cnt]);
-   	  notes[cnt] = (uint8_t)VarDataTab[cnt];
-	}
+      EE_ReadVariable(VirtAddVarTab[cnt],&VarDataTab[cnt]);
+      notes[cnt] = (uint8_t)VarDataTab[cnt];
+    }
   }else{
     for(cnt = 0;cnt < cntmax;cnt ++){
       EE_WriteVariable(VirtAddVarTab[cnt],(uint16_t)(notes[cnt]));
@@ -166,8 +169,14 @@ void sensorMeasure(int ch){
     cnt ++;
   }
   sensorPinClear(ch);
+  while(1){
+    if(sensorPinCheck(ch) !=GPIO_PIN_SET){
+      break;
+    }
+  }
   val[ch] +=  (cnt - val[ch])/4;
 }
+
 
 void sensorLedBlink(){
   int cnt;
@@ -194,22 +203,41 @@ void sensorCalibration(void){
   sensorLedBlink();
 
   for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
-	val[ch] = 0;
+    val[ch] = 0;
+    comp[ch] = -1;
+    compH[ch] = -1;
+    compL[ch] = 0x7fff;
   }
-  for(cnt = 0;cnt < 128;cnt ++){
+  for(cnt = 0;cnt < SENSOR_CALIB_TIMES;cnt ++){
     for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
-  	  sensorMeasure(ch);
-  	  calc = SENSOR_MARGIN_DIV / (val[ch] + SENSOR_MARGIN_DIV);
-  	  if(calc < 16){
-  		 calc = 16;
-  	  }
-      comp[ch] = val[ch] + calc;
-	}
-	HAL_Delay(WAIT_TIME_MS);
+      sensorMeasure(ch);
+      calc = SENSOR_MARGIN_DIV / (val[ch] + SENSOR_MARGIN_BASE);
+      if(calc < SENSOR_MARGIN_LIMIT){
+        calc = SENSOR_MARGIN_LIMIT;
+      }
+      comp[ch] += ((val[ch] + calc) - comp[ch])/4;
+      if(comp[ch] > compH[ch]){
+        compH[ch] = comp[ch];
+      }
+      if(comp[ch] < compL[ch]){
+        compL[ch] = comp[ch];
+      }
+    }
+    HAL_Delay(1);
+  }
+  for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
+    comp[ch] = compH[ch]+((compH[ch]-compL[ch])/8);
   }
   HAL_Delay(500);
 
   sensorLedBlink();
+
+/* debug
+for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
+sendCtlChange(0,ch+8,(uint8_t)(comp[ch]));
+}
+*/
+
 }
 
 int old_button = GPIO_PIN_RESET;
@@ -219,7 +247,7 @@ int checkCalibrationButton(){
   int res = 0;
   pin = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_1);
   if((pin == GPIO_PIN_SET)&&(pin != old_button)){
-	res = 1;
+    res = 1;
   }
   old_button = pin;
   return(res);
@@ -235,6 +263,10 @@ void trigNoteOff(){
   }
 }
 
+/* debug
+int dcnt = 0;
+#define DCNT_MAX 48
+*/
 
 int main(void){
   int ch;
@@ -257,47 +289,56 @@ int main(void){
   sensorCalibration();
 
   while (1){
+    // touch Sensor
+    for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
+      sensorMeasure(ch);
+      if(val[ch] > comp[ch]){
+        if(seq[ch] < SENSOR_CHECK_NUM){
+          seq[ch]++;
+          if(seq[ch] > SENSOR_UP_VALUE){
+            if(onoff[ch] == 0){
+              sensorLEDOn(ch);
+              onoff[ch] = 1;
+              led_on();
+              sendNoteOn(0,notes[ch],100);
+            }
+          }
+        }
+      }else{
+        if(seq[ch] > 0){
+          seq[ch]--;
+          if(seq[ch] < SENSOR_DOWN_VALUE){
+            if(onoff[ch] == 1){
+              sensorLEDOff(ch);
+              onoff[ch] = 0;
+              led_on();
+              sendNoteOff(0,notes[ch]);
+            }
+          }
+        }
+      }
+/* debug
+if(dcnt == DCNT_MAX){
+sendCtlChange(0,ch,(uint8_t)(val[ch]));
+}
+*/
+      processMidiMessage();
+    }
 
-	  // touch Sensor
-	  for(ch = 0;ch < TOUCH_CHANNELS; ch ++){
-	    sensorMeasure(ch);
-	    if(val[ch] > comp[ch]){
-	      if(seq[ch] < 5){
-	        seq[ch]++;
-	        if(seq[ch] > 2){
-  	          if(onoff[ch] == 0){
-    	  		sensorLEDOn(ch);
-	  	        onoff[ch] = 1;
-	  	        led_on();
-	  	        sendNoteOn(0,notes[ch],100);
-	  	  	    sendCtlChange(0,ch,(uint8_t)(val[ch]));
-  	          }
-	        }
-  	      }
-	    }else{
-	      if(seq[ch] > 0){
-	    	seq[ch]--;
-	    	if(seq[ch] < 2){
-	    	  if(onoff[ch] == 1){
-	  		    sensorLEDOff(ch);
-	  	  	    onoff[ch] = 0;
-	  	  	    led_on();
-	  	  	    sendNoteOff(0,notes[ch]);
-	  	  	    sendCtlChange(0,ch,(uint8_t)(val[ch]));
-	    	  }
-	    	}
-  	      }
-	    }
-	    processMidiMessage();
-	  }
+/* for debug
+dcnt ++;
+if(dcnt > DCNT_MAX){
+dcnt = 0;
+}
+*/
 
-	  // Calibration
-	  if(checkCalibrationButton() != 0){
-	    sensorCalibration();
-	  }
+    // Calibration
+    if(checkCalibrationButton() != 0){
+      sensorCalibration();
+    }
 
-	  trigNoteOff();
-	  HAL_Delay(WAIT_TIME_MS);
+    trigNoteOff();
+    HAL_Delay(WAIT_TIME_MS);
   }
 }
 

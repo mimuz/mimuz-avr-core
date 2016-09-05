@@ -518,7 +518,7 @@ void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state)
   if (state == 1)
   {
     /* Configure Low Connection State */
-	
+
   }
   else
   {
