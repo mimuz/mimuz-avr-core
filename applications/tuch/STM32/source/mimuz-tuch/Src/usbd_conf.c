@@ -302,7 +302,8 @@ USBD_StatusTypeDef  USBD_LL_DeInit (USBD_HandleTypeDef *pdev)
   */
 USBD_StatusTypeDef  USBD_LL_Start(USBD_HandleTypeDef *pdev)
 {
-  HAL_PCD_Start((PCD_HandleTypeDef*)pdev->pData);
+
+//  HAL_PCD_Start((PCD_HandleTypeDef*)pdev->pData); // comment-out for mi:muz:tuch v0.20 (to external pull-up)
   return USBD_OK;
 }
 
