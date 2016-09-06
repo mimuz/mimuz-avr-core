@@ -20,7 +20,7 @@ static uint8_t  USBD_MIDI_DataIn (USBD_HandleTypeDef *pdev, uint8_t epnum);
 static uint8_t  USBD_MIDI_DataOut (USBD_HandleTypeDef *pdev, uint8_t epnum);
 
 static uint8_t  *USBD_MIDI_GetCfgDesc (uint16_t *length);
-uint8_t  *USBD_MIDI_GetDeviceQualifierDescriptor (uint16_t *length);
+//uint8_t  *USBD_MIDI_GetDeviceQualifierDescriptor (uint16_t *length);
 USBD_HandleTypeDef *pInstance = NULL; 
 
 uint32_t APP_Rx_ptr_in  = 0;
@@ -32,6 +32,7 @@ __ALIGN_BEGIN uint8_t USB_Rx_Buffer[MIDI_DATA_OUT_PACKET_SIZE] __ALIGN_END ;
 __ALIGN_BEGIN uint8_t APP_Rx_Buffer[APP_RX_DATA_SIZE] __ALIGN_END ;
 
 /* USB Standard Device Descriptor */
+/*
 __ALIGN_BEGIN static uint8_t USBD_MIDI_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_DESC] __ALIGN_END =
 {
   USB_LEN_DEV_QUALIFIER_DESC,
@@ -45,6 +46,7 @@ __ALIGN_BEGIN static uint8_t USBD_MIDI_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER
   0x01,
   0x00,
 };
+*/
 
 /* USB MIDI interface class callbacks structure */
 USBD_ClassTypeDef  USBD_MIDI = 
@@ -58,18 +60,18 @@ USBD_ClassTypeDef  USBD_MIDI =
   USBD_MIDI_DataOut,
   NULL,
   NULL,
-  NULL,     
-  USBD_MIDI_GetCfgDesc,  
-  USBD_MIDI_GetCfgDesc,    
-  USBD_MIDI_GetCfgDesc,
-  USBD_MIDI_GetDeviceQualifierDescriptor,
+  NULL,
+  NULL,// HS
+  USBD_MIDI_GetCfgDesc,// FS
+  NULL,// OTHER SPEED
+  NULL,// DEVICE_QUALIFIER
 };
 
 /* USB MIDI device Configuration Descriptor */
 __ALIGN_BEGIN uint8_t USBD_MIDI_CfgDesc[USB_MIDI_CONFIG_DESC_SIZ] __ALIGN_END =
 {
   // configuration descriptor
-  0x09, 0x02, 0x65, 0x00, 0x02, 0x01, 0x00, 0xc0, 0x50,
+  0x09, 0x02, 0x65, 0x00, 0x02, 0x01, 0x00, 0x80, 0x31,
 
   // The Audio Interface Collection
   0x09, 0x04, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, // Standard AC Interface Descriptor
@@ -173,10 +175,10 @@ static uint8_t *USBD_MIDI_GetCfgDesc (uint16_t *length){
   return USBD_MIDI_CfgDesc;
 }
 
-uint8_t *USBD_MIDI_GetDeviceQualifierDescriptor (uint16_t *length){
-  *length = sizeof (USBD_MIDI_DeviceQualifierDesc);
-  return USBD_MIDI_DeviceQualifierDesc;
-}
+//uint8_t *USBD_MIDI_GetDeviceQualifierDescriptor (uint16_t *length){
+//  *length = sizeof (USBD_MIDI_DeviceQualifierDesc);
+//  return USBD_MIDI_DeviceQualifierDesc;
+//}
 
 uint8_t USBD_MIDI_RegisterInterface(USBD_HandleTypeDef *pdev, USBD_MIDI_ItfTypeDef *fops)
 {
