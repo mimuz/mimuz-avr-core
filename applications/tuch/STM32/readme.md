@@ -47,11 +47,12 @@ STM32 version of mi:muz:tuch (v0.2x) is my first STM32 project, it now only supp
 - [Tactical Switch (4 points SMT 4.5mm)](http://www.aitendo.com/product/7047) * 1
 - [Tactical Switch (2 points SMT)](http://www.aitendo.com/product/10525) * 1
 
-## Software
+## Firmware
 
-- [Touch Sensor (for ATmega8A)](https://github.com/tadfmac/mi-muz/tree/master/applications/tuch/sketch/mega8_touchSensor/)
+- [Source](./source)
+- [bin](./bin)
 
-### Firmware Setup
+### Firmware Setup 
 
 1. Install [SW4STM32](http://www.st.com/content/st_com/ja/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-ides/sw4stm32.html)
 2. Install DFU Loader (i.e. dfu-util see [dfu-util - Device Firmware Upgrade Utilities](http://dfu-util.sourceforge.net/))
